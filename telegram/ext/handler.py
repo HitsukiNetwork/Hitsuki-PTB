@@ -106,7 +106,7 @@ class Handler(object):
             dispatcher (:class:`telegram.ext.Dispatcher`): The dispatcher.
 
         """
-        optional_args = dict()
+        optional_args = {}
 
         if self.pass_update_queue:
             optional_args['update_queue'] = dispatcher.update_queue

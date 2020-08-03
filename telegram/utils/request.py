@@ -77,7 +77,7 @@ class Request(object):
                  connect_timeout=5.,
                  read_timeout=5.):
         if urllib3_proxy_kwargs is None:
-            urllib3_proxy_kwargs = dict()
+            urllib3_proxy_kwargs = {}
 
         self._connect_timeout = connect_timeout
 

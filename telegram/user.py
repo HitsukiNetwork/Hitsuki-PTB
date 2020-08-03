@@ -119,7 +119,7 @@ class User(TelegramObject):
         if not data:
             return []
 
-        users = list()
+        users = []
         for user in data:
             users.append(cls.de_json(user, bot))
 

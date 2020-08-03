@@ -190,7 +190,7 @@ class EncryptedPassportElement(TelegramObject):
         if not data:
             return []
 
-        encrypted_passport_elements = list()
+        encrypted_passport_elements = []
         for element in data:
             encrypted_passport_elements.append(cls.de_json(element, bot))
 
