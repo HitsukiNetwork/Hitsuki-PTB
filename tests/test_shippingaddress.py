@@ -55,7 +55,8 @@ class TestShippingAddress(object):
         assert shipping_address.street_line2 == self.street_line2
         assert shipping_address.post_code == self.post_code
 
-    def test_to_dict(self, shipping_address):
+    @staticmethod
+    def test_to_dict(shipping_address):
         shipping_address_dict = shipping_address.to_dict()
 
         assert isinstance(shipping_address_dict, dict)

@@ -48,7 +48,8 @@ class TestVideo(object):
     caption = u'<b>VideoTest</b> - *Caption*'
     video_file_url = 'https://python-telegram-bot.org/static/testfiles/telegram.mp4'
 
-    def test_creation(self, video):
+    @staticmethod
+    def test_creation(video):
         # Make sure file has been uploaded.
         assert isinstance(video, Video)
         assert isinstance(video.file_id, str)
@@ -129,12 +130,14 @@ class TestVideo(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, video):
+    @staticmethod
+    def test_resend(bot, chat_id, video):
         message = bot.send_video(chat_id, video.file_id)
 
         assert message.video == video
 
-    def test_send_with_video(self, monkeypatch, bot, chat_id, video):
+    @staticmethod
+    def test_send_with_video(monkeypatch, bot, chat_id, video):
 
         def test(_, url, data, **kwargs):
             return data['video'] == video.file_id
@@ -161,7 +164,8 @@ class TestVideo(object):
         assert json_video.mime_type == self.mime_type
         assert json_video.file_size == self.file_size
 
-    def test_to_dict(self, video):
+    @staticmethod
+    def test_to_dict(video):
         video_dict = video.to_dict()
 
         assert isinstance(video_dict, dict)
@@ -174,21 +178,25 @@ class TestVideo(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_video(chat_id, open(os.devnull, 'rb'))
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_video(chat_id, '')
 
-    def test_error_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_video(chat_id=chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, video):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, video):
 
         def test(*args, **kwargs):
             return args[1] == video.file_id

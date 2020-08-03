@@ -48,7 +48,8 @@ class TestOrderInfo(object):
         assert order_info.email == self.email
         assert order_info.shipping_address == self.shipping_address
 
-    def test_to_dict(self, order_info):
+    @staticmethod
+    def test_to_dict(order_info):
         order_info_dict = order_info.to_dict()
 
         assert isinstance(order_info_dict, dict)

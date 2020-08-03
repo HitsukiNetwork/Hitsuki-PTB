@@ -63,7 +63,8 @@ class TestPreCheckoutQuery(object):
         assert pre_checkout_query.from_user == self.from_user
         assert pre_checkout_query.order_info == self.order_info
 
-    def test_to_dict(self, pre_checkout_query):
+    @staticmethod
+    def test_to_dict(pre_checkout_query):
         pre_checkout_query_dict = pre_checkout_query.to_dict()
 
         assert isinstance(pre_checkout_query_dict, dict)
@@ -75,7 +76,8 @@ class TestPreCheckoutQuery(object):
         assert pre_checkout_query_dict['from'] == pre_checkout_query.from_user.to_dict()
         assert pre_checkout_query_dict['order_info'] == pre_checkout_query.order_info.to_dict()
 
-    def test_answer(self, monkeypatch, pre_checkout_query):
+    @staticmethod
+    def test_answer(monkeypatch, pre_checkout_query):
 
         def test(*args, **kwargs):
             return args[1] == pre_checkout_query.id

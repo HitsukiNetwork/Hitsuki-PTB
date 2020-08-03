@@ -67,11 +67,13 @@ class TestVenue(object):
         message = bot.send_venue(chat_id, venue=venue)
         assert message
 
-    def test_send_venue_without_required(self, bot, chat_id):
+    @staticmethod
+    def test_send_venue_without_required(bot, chat_id):
         with pytest.raises(ValueError, match='Either venue or latitude, longitude, address and'):
             bot.send_venue(chat_id=chat_id)
 
-    def test_to_dict(self, venue):
+    @staticmethod
+    def test_to_dict(venue):
         venue_dict = venue.to_dict()
 
         assert isinstance(venue_dict, dict)

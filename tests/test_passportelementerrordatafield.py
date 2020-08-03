@@ -44,7 +44,8 @@ class TestPassportElementErrorDataField(object):
         assert passport_element_error_data_field.data_hash == self.data_hash
         assert passport_element_error_data_field.message == self.message
 
-    def test_to_dict(self, passport_element_error_data_field):
+    @staticmethod
+    def test_to_dict(passport_element_error_data_field):
         passport_element_error_data_field_dict = passport_element_error_data_field.to_dict()
 
         assert isinstance(passport_element_error_data_field_dict, dict)

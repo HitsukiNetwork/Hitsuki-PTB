@@ -48,7 +48,8 @@ class TestMessageEntity(object):
         assert entity.offset == self.offset
         assert entity.length == self.length
 
-    def test_to_dict(self, message_entity):
+    @staticmethod
+    def test_to_dict(message_entity):
         entity_dict = message_entity.to_dict()
 
         assert isinstance(entity_dict, dict)

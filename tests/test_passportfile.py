@@ -39,7 +39,8 @@ class TestPassportFile(object):
         assert passport_file.file_size == self.file_size
         assert passport_file.file_date == self.file_date
 
-    def test_to_dict(self, passport_file):
+    @staticmethod
+    def test_to_dict(passport_file):
         passport_file_dict = passport_file.to_dict()
 
         assert isinstance(passport_file_dict, dict)

@@ -38,7 +38,8 @@ class TestShippingOption(object):
         assert shipping_option.title == self.title
         assert shipping_option.prices == self.prices
 
-    def test_to_dict(self, shipping_option):
+    @staticmethod
+    def test_to_dict(shipping_option):
         shipping_option_dict = shipping_option.to_dict()
 
         assert isinstance(shipping_option_dict, dict)

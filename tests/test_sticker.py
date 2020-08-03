@@ -54,7 +54,8 @@ class TestSticker(object):
     thumb_heigth = 90
     thumb_file_size = 3672
 
-    def test_creation(self, sticker):
+    @staticmethod
+    def test_creation(sticker):
         # Make sure file has been uploaded.
         assert isinstance(sticker, Sticker)
         assert isinstance(sticker.file_id, str)
@@ -73,7 +74,8 @@ class TestSticker(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_all_args(self, bot, chat_id, sticker_file, sticker):
+    @staticmethod
+    def test_send_all_args(bot, chat_id, sticker_file, sticker):
         message = bot.send_sticker(chat_id, sticker=sticker_file, disable_notification=False)
 
         assert isinstance(message.sticker, Sticker)
@@ -92,7 +94,8 @@ class TestSticker(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_get_and_download(self, bot, sticker):
+    @staticmethod
+    def test_get_and_download(bot, sticker):
         new_file = bot.get_file(sticker.file_id)
 
         assert new_file.file_size == sticker.file_size
@@ -105,7 +108,8 @@ class TestSticker(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, sticker):
+    @staticmethod
+    def test_resend(bot, chat_id, sticker):
         message = bot.send_sticker(chat_id=chat_id, sticker=sticker.file_id)
 
         assert message.sticker == sticker
@@ -159,7 +163,8 @@ class TestSticker(object):
         assert json_sticker.file_size == self.file_size
         assert json_sticker.thumb == sticker.thumb
 
-    def test_send_with_sticker(self, monkeypatch, bot, chat_id, sticker):
+    @staticmethod
+    def test_send_with_sticker(monkeypatch, bot, chat_id, sticker):
 
         def test(_, url, data, **kwargs):
             return data['sticker'] == sticker.file_id
@@ -168,7 +173,8 @@ class TestSticker(object):
         message = bot.send_sticker(sticker=sticker, chat_id=chat_id)
         assert message
 
-    def test_to_dict(self, sticker):
+    @staticmethod
+    def test_to_dict(sticker):
         sticker_dict = sticker.to_dict()
 
         assert isinstance(sticker_dict, dict)
@@ -180,17 +186,20 @@ class TestSticker(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_sticker(chat_id, open(os.devnull, 'rb'))
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_sticker(chat_id, '')
 
-    def test_error_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_sticker(chat_id)
 
@@ -245,7 +254,8 @@ class TestStickerSet(object):
         assert sticker_set.stickers == self.stickers
 
     @pytest.mark.skipif(os.getenv('APPVEYOR'), reason='No Sticker(set) for Appveyor bot (' 'yet)')
-    def test_sticker_set_to_dict(self, sticker_set):
+    @staticmethod
+    def test_sticker_set_to_dict(sticker_set):
         sticker_set_dict = sticker_set.to_dict()
 
         assert isinstance(sticker_set_dict, dict)
@@ -257,7 +267,8 @@ class TestStickerSet(object):
     @pytest.mark.skipif(os.getenv('APPVEYOR'), reason='No Sticker(set) for Appveyor bot (' 'yet)')
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_bot_methods_1(self, bot, sticker_set):
+    @staticmethod
+    def test_bot_methods_1(bot, sticker_set):
         with open('tests/data/telegram_sticker.png', 'rb') as f:
             file = bot.upload_sticker_file(95205500, f)
         assert file
@@ -266,19 +277,22 @@ class TestStickerSet(object):
     @pytest.mark.skipif(os.getenv('APPVEYOR'), reason='No Sticker(set) for Appveyor bot (' 'yet)')
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_bot_methods_2(self, bot, sticker_set):
+    @staticmethod
+    def test_bot_methods_2(bot, sticker_set):
         file_id = sticker_set.stickers[0].file_id
         assert bot.set_sticker_position_in_set(file_id, 1)
 
     @pytest.mark.skipif(os.getenv('APPVEYOR'), reason='No Sticker(set) for Appveyor bot (' 'yet)')
     @flaky(10, 1)
     @pytest.mark.timeout(10)
-    def test_bot_methods_3(self, bot, sticker_set):
+    @staticmethod
+    def test_bot_methods_3(bot, sticker_set):
         sleep(1)
         file_id = sticker_set.stickers[-1].file_id
         assert bot.delete_sticker_from_set(file_id)
 
-    def test_get_file_instance_method(self, monkeypatch, sticker):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, sticker):
 
         def test(*args, **kwargs):
             return args[1] == sticker.file_id
@@ -333,7 +347,8 @@ class TestMaskPosition(object):
         assert mask_position.y_shift == self.y_shift
         assert mask_position.scale == self.scale
 
-    def test_mask_position_to_dict(self, mask_position):
+    @staticmethod
+    def test_mask_position_to_dict(mask_position):
         mask_position_dict = mask_position.to_dict()
 
         assert isinstance(mask_position_dict, dict)

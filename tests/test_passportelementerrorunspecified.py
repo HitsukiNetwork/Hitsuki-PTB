@@ -41,7 +41,8 @@ class TestPassportElementErrorUnspecified(object):
         assert passport_element_error_unspecified.element_hash == self.element_hash
         assert passport_element_error_unspecified.message == self.message
 
-    def test_to_dict(self, passport_element_error_unspecified):
+    @staticmethod
+    def test_to_dict(passport_element_error_unspecified):
         passport_element_error_unspecified_dict = passport_element_error_unspecified.to_dict()
 
         assert isinstance(passport_element_error_unspecified_dict, dict)

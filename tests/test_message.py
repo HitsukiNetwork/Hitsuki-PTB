@@ -187,12 +187,14 @@ class TestMessage(object):
                            caption=test_text,
                            caption_entities=[MessageEntity(**e) for e in test_entities])
 
-    def test_all_posibilities_de_json_and_to_dict(self, bot, message_params):
+    @staticmethod
+    def test_all_posibilities_de_json_and_to_dict(bot, message_params):
         new = Message.de_json(message_params.to_dict(), bot)
 
         assert new.to_dict() == message_params.to_dict()
 
-    def test_dict_approach(self, message):
+    @staticmethod
+    def test_dict_approach(message):
         assert message['date'] == message.date
         assert message['chat_id'] == message.chat_id
         assert message['no_key'] is None
@@ -251,7 +253,8 @@ class TestMessage(object):
         text_html = self.test_message.text_html
         assert text_html == test_html_string
 
-    def test_text_html_empty(self, message):
+    @staticmethod
+    def test_text_html_empty(message):
         message.text = None
         message.caption = "test"
         assert message.text_html is None
@@ -269,7 +272,8 @@ class TestMessage(object):
         text_markdown = self.test_message.text_markdown
         assert text_markdown == test_md_string
 
-    def test_text_markdown_empty(self, message):
+    @staticmethod
+    def test_text_markdown_empty(message):
         message.text = None
         message.caption = "test"
         assert message.text_markdown is None
@@ -311,7 +315,8 @@ class TestMessage(object):
         caption_html = self.test_message.caption_html
         assert caption_html == test_html_string
 
-    def test_caption_html_empty(self, message):
+    @staticmethod
+    def test_caption_html_empty(message):
         message.text = "test"
         message.caption = None
         assert message.caption_html is None
@@ -329,7 +334,8 @@ class TestMessage(object):
         caption_markdown = self.test_message.caption_markdown
         assert caption_markdown == test_md_string
 
-    def test_caption_markdown_empty(self, message):
+    @staticmethod
+    def test_caption_markdown_empty(message):
         message.text = "test"
         message.caption = None
         assert message.caption_markdown is None
@@ -377,10 +383,12 @@ class TestMessage(object):
         assert message.parse_entities() == {link_entity: text}
         assert next(iter(message.parse_entities())).url == url
 
-    def test_chat_id(self, message):
+    @staticmethod
+    def test_chat_id(message):
         assert message.chat_id == message.chat.id
 
-    def test_link(self, message):
+    @staticmethod
+    def test_link(message):
         assert message.link is None
         message.chat.username = 'username'
         message.chat.type = 'supergroup'
@@ -392,7 +400,8 @@ class TestMessage(object):
         message.chat.type = 'private'
         assert message.link is None
 
-    def test_effective_attachment(self, message_params):
+    @staticmethod
+    def test_effective_attachment(message_params):
         for i in ('audio', 'game', 'document', 'animation', 'photo', 'sticker', 'video', 'voice',
                   'video_note', 'contact', 'location', 'venue', 'invoice', 'invoice',
                   'successful_payment'):
@@ -403,7 +412,8 @@ class TestMessage(object):
             item = None
         assert message_params.effective_attachment == item
 
-    def test_reply_text(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_text(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -468,7 +478,8 @@ class TestMessage(object):
                                   reply_to_message_id=message.message_id,
                                   quote=True)
 
-    def test_reply_media_group(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_media_group(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -483,7 +494,8 @@ class TestMessage(object):
         assert message.reply_media_group(media='reply_media_group')
         assert message.reply_media_group(media='reply_media_group', quote=True)
 
-    def test_reply_photo(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_photo(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -498,7 +510,8 @@ class TestMessage(object):
         assert message.reply_photo(photo='test_photo')
         assert message.reply_photo(photo='test_photo', quote=True)
 
-    def test_reply_audio(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_audio(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -513,7 +526,8 @@ class TestMessage(object):
         assert message.reply_audio(audio='test_audio')
         assert message.reply_audio(audio='test_audio', quote=True)
 
-    def test_reply_document(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_document(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -528,7 +542,8 @@ class TestMessage(object):
         assert message.reply_document(document='test_document')
         assert message.reply_document(document='test_document', quote=True)
 
-    def test_reply_animation(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_animation(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -543,7 +558,8 @@ class TestMessage(object):
         assert message.reply_animation(animation='test_animation')
         assert message.reply_animation(animation='test_animation', quote=True)
 
-    def test_reply_sticker(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_sticker(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -558,7 +574,8 @@ class TestMessage(object):
         assert message.reply_sticker(sticker='test_sticker')
         assert message.reply_sticker(sticker='test_sticker', quote=True)
 
-    def test_reply_video(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_video(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -573,7 +590,8 @@ class TestMessage(object):
         assert message.reply_video(video='test_video')
         assert message.reply_video(video='test_video', quote=True)
 
-    def test_reply_video_note(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_video_note(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -588,7 +606,8 @@ class TestMessage(object):
         assert message.reply_video_note(video_note='test_video_note')
         assert message.reply_video_note(video_note='test_video_note', quote=True)
 
-    def test_reply_voice(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_voice(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -603,7 +622,8 @@ class TestMessage(object):
         assert message.reply_voice(voice='test_voice')
         assert message.reply_voice(voice='test_voice', quote=True)
 
-    def test_reply_location(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_location(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -618,7 +638,8 @@ class TestMessage(object):
         assert message.reply_location(location='test_location')
         assert message.reply_location(location='test_location', quote=True)
 
-    def test_reply_venue(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_venue(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -633,7 +654,8 @@ class TestMessage(object):
         assert message.reply_venue(venue='test_venue')
         assert message.reply_venue(venue='test_venue', quote=True)
 
-    def test_reply_contact(self, monkeypatch, message):
+    @staticmethod
+    def test_reply_contact(monkeypatch, message):
 
         def test(*args, **kwargs):
             id = args[1] == message.chat_id
@@ -648,7 +670,8 @@ class TestMessage(object):
         assert message.reply_contact(contact='test_contact')
         assert message.reply_contact(contact='test_contact', quote=True)
 
-    def test_forward(self, monkeypatch, message):
+    @staticmethod
+    def test_forward(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == 123456
@@ -665,7 +688,8 @@ class TestMessage(object):
         assert message.forward(123456, disable_notification=True)
         assert not message.forward(635241)
 
-    def test_edit_text(self, monkeypatch, message):
+    @staticmethod
+    def test_edit_text(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == message.chat_id
@@ -676,7 +700,8 @@ class TestMessage(object):
         monkeypatch.setattr('telegram.Bot.edit_message_text', test)
         assert message.edit_text(text='test')
 
-    def test_edit_caption(self, monkeypatch, message):
+    @staticmethod
+    def test_edit_caption(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == message.chat_id
@@ -687,7 +712,8 @@ class TestMessage(object):
         monkeypatch.setattr('telegram.Bot.edit_message_caption', test)
         assert message.edit_caption(caption='new caption')
 
-    def test_edit_media(self, monkeypatch, message):
+    @staticmethod
+    def test_edit_media(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == message.chat_id
@@ -698,7 +724,8 @@ class TestMessage(object):
         monkeypatch.setattr('telegram.Bot.edit_message_media', test)
         assert message.edit_media('my_media')
 
-    def test_edit_reply_markup(self, monkeypatch, message):
+    @staticmethod
+    def test_edit_reply_markup(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == message.chat_id
@@ -709,7 +736,8 @@ class TestMessage(object):
         monkeypatch.setattr('telegram.Bot.edit_message_reply_markup', test)
         assert message.edit_reply_markup(reply_markup=[['1', '2']])
 
-    def test_delete(self, monkeypatch, message):
+    @staticmethod
+    def test_delete(monkeypatch, message):
 
         def test(*args, **kwargs):
             chat_id = kwargs['chat_id'] == message.chat_id

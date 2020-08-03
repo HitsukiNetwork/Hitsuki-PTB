@@ -31,7 +31,8 @@ from telegram import TelegramObject
 
 class TestTelegramObject(object):
 
-    def test_to_json_native(self, monkeypatch):
+    @staticmethod
+    def test_to_json_native(monkeypatch):
         if rapidjson:
             monkeypatch.setattr('rapidjson.dumps', json_lib.dumps)
         # to_json simply takes whatever comes from to_dict, therefore we only need to test it once
@@ -55,7 +56,8 @@ class TestTelegramObject(object):
             telegram_object.to_json()
 
     @pytest.mark.skipif(not rapidjson, reason='rapidjson not installed')
-    def test_to_json_rapidjson(self, monkeypatch):
+    @staticmethod
+    def test_to_json_rapidjson(monkeypatch):
         # to_json simply takes whatever comes from to_dict, therefore we only need to test it once
         telegram_object = TelegramObject()
 

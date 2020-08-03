@@ -41,7 +41,8 @@ class TestPassportElementErrorFrontSide(object):
         assert passport_element_error_front_side.file_hash == self.file_hash
         assert passport_element_error_front_side.message == self.message
 
-    def test_to_dict(self, passport_element_error_front_side):
+    @staticmethod
+    def test_to_dict(passport_element_error_front_side):
         passport_element_error_front_side_dict = passport_element_error_front_side.to_dict()
 
         assert isinstance(passport_element_error_front_side_dict, dict)

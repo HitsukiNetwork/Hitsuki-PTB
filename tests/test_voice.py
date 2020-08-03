@@ -45,7 +45,8 @@ class TestVoice(object):
     caption = u'Test *voice*'
     voice_file_url = 'https://python-telegram-bot.org/static/testfiles/telegram.ogg'
 
-    def test_creation(self, voice):
+    @staticmethod
+    def test_creation(voice):
         # Make sure file has been uploaded.
         assert isinstance(voice, Voice)
         assert isinstance(voice.file_id, str)
@@ -76,7 +77,8 @@ class TestVoice(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_get_and_download(self, bot, voice):
+    @staticmethod
+    def test_get_and_download(bot, voice):
         new_file = bot.get_file(voice.file_id)
 
         assert new_file.file_size == voice.file_size
@@ -101,12 +103,14 @@ class TestVoice(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, voice):
+    @staticmethod
+    def test_resend(bot, chat_id, voice):
         message = bot.sendVoice(chat_id, voice.file_id)
 
         assert message.voice == voice
 
-    def test_send_with_voice(self, monkeypatch, bot, chat_id, voice):
+    @staticmethod
+    def test_send_with_voice(monkeypatch, bot, chat_id, voice):
 
         def test(_, url, data, **kwargs):
             return data['voice'] == voice.file_id
@@ -130,7 +134,8 @@ class TestVoice(object):
         assert json_voice.mime_type == self.mime_type
         assert json_voice.file_size == self.file_size
 
-    def test_to_dict(self, voice):
+    @staticmethod
+    def test_to_dict(voice):
         voice_dict = voice.to_dict()
 
         assert isinstance(voice_dict, dict)
@@ -141,21 +146,25 @@ class TestVoice(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.sendVoice(chat_id, open(os.devnull, 'rb'))
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.sendVoice(chat_id, '')
 
-    def test_error_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.sendVoice(chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, voice):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, voice):
 
         def test(*args, **kwargs):
             return args[1] == voice.file_id

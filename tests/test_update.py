@@ -77,12 +77,14 @@ class TestUpdate(object):
                 assert getattr(update, type) == paramdict[type]
         assert i == 1
 
-    def test_update_de_json_empty(self, bot):
+    @staticmethod
+    def test_update_de_json_empty(bot):
         update = Update.de_json(None, bot)
 
         assert update is None
 
-    def test_to_dict(self, update):
+    @staticmethod
+    def test_to_dict(update):
         update_dict = update.to_dict()
 
         assert isinstance(update_dict, dict)
@@ -91,7 +93,8 @@ class TestUpdate(object):
             if getattr(update, type) is not None:
                 assert update_dict[type] == getattr(update, type).to_dict()
 
-    def test_effective_chat(self, update):
+    @staticmethod
+    def test_effective_chat(update):
         # Test that it's sometimes None per docstring
         chat = update.effective_chat
         if not (update.inline_query is not None or update.chosen_inline_result is not None or
@@ -101,7 +104,8 @@ class TestUpdate(object):
         else:
             assert chat is None
 
-    def test_effective_user(self, update):
+    @staticmethod
+    def test_effective_user(update):
         # Test that it's sometimes None per docstring
         user = update.effective_user
         if not (update.channel_post is not None or update.edited_channel_post is not None):
@@ -109,7 +113,8 @@ class TestUpdate(object):
         else:
             assert user is None
 
-    def test_effective_message(self, update):
+    @staticmethod
+    def test_effective_message(update):
         # Test that it's sometimes None per docstring
         eff_message = update.effective_message
         if not (update.inline_query is not None or update.chosen_inline_result is not None or

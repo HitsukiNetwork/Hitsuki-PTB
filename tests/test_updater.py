@@ -276,8 +276,8 @@ class TestUpdater(object):
             updater.httpd.shutdown()
             thr.join()
 
-    def _send_webhook_msg(self,
-                          ip,
+    @staticmethod
+    def _send_webhook_msg(ip,
                           port,
                           payload_str,
                           url_path='',
@@ -309,7 +309,8 @@ class TestUpdater(object):
 
         return urlopen(req)
 
-    def signal_sender(self, updater):
+    @staticmethod
+    def signal_sender(updater):
         sleep(0.2)
         while not updater.running:
             sleep(0.2)
@@ -348,20 +349,24 @@ class TestUpdater(object):
         assert updater.running is False
         assert temp_var['a'] != 0
 
-    def test_create_bot(self):
+    @staticmethod
+    def test_create_bot():
         updater = Updater('123:abcd')
         assert updater.bot is not None
 
-    def test_mutual_exclude_token_bot(self):
+    @staticmethod
+    def test_mutual_exclude_token_bot():
         bot = Bot('123:zyxw')
         with pytest.raises(ValueError):
             Updater(token='123:abcd', bot=bot)
 
-    def test_no_token_or_bot(self):
+    @staticmethod
+    def test_no_token_or_bot():
         with pytest.raises(ValueError):
             Updater()
 
-    def test_mutual_exclude_bot_private_key(self):
+    @staticmethod
+    def test_mutual_exclude_bot_private_key():
         bot = Bot('123:zyxw')
         with pytest.raises(ValueError):
             Updater(bot=bot, private_key=b'key')

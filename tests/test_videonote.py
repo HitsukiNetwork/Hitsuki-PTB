@@ -44,7 +44,8 @@ class TestVideoNote(object):
 
     caption = u'VideoNoteTest - Caption'
 
-    def test_creation(self, video_note):
+    @staticmethod
+    def test_creation(video_note):
         # Make sure file has been uploaded.
         assert isinstance(video_note, VideoNote)
         assert isinstance(video_note.file_id, str)
@@ -94,12 +95,14 @@ class TestVideoNote(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, video_note):
+    @staticmethod
+    def test_resend(bot, chat_id, video_note):
         message = bot.send_video_note(chat_id, video_note.file_id)
 
         assert message.video_note == video_note
 
-    def test_send_with_video_note(self, monkeypatch, bot, chat_id, video_note):
+    @staticmethod
+    def test_send_with_video_note(monkeypatch, bot, chat_id, video_note):
 
         def test(_, url, data, **kwargs):
             return data['video_note'] == video_note.file_id
@@ -122,7 +125,8 @@ class TestVideoNote(object):
         assert json_video_note.duration == self.duration
         assert json_video_note.file_size == self.file_size
 
-    def test_to_dict(self, video_note):
+    @staticmethod
+    def test_to_dict(video_note):
         video_note_dict = video_note.to_dict()
 
         assert isinstance(video_note_dict, dict)
@@ -133,21 +137,25 @@ class TestVideoNote(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_video_note(chat_id, open(os.devnull, 'rb'))
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_video_note(chat_id, '')
 
-    def test_error_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_video_note(chat_id=chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, video_note):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, video_note):
 
         def test(*args, **kwargs):
             return args[1] == video_note.file_id
