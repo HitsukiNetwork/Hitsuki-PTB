@@ -311,8 +311,8 @@ class TestSendMediaGroup(object):
         messages = bot.send_media_group(chat_id, media_group)
         assert isinstance(messages, list)
         assert len(messages) == 2
-        assert all([isinstance(mes, Message) for mes in messages])
-        assert all([mes.media_group_id == messages[0].media_group_id for mes in messages])
+        assert all(isinstance(mes, Message) for mes in messages)
+        assert all(mes.media_group_id == messages[0].media_group_id for mes in messages)
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
@@ -325,8 +325,8 @@ class TestSendMediaGroup(object):
                                         reply_to_message_id=m1.message_id)
         assert isinstance(messages, list)
         assert len(messages) == 2
-        assert all([isinstance(mes, Message) for mes in messages])
-        assert all([mes.media_group_id == messages[0].media_group_id for mes in messages])
+        assert all(isinstance(mes, Message) for mes in messages)
+        assert all(mes.media_group_id == messages[0].media_group_id for mes in messages)
 
     @staticmethod
     def test_send_media_group_new_files(
@@ -340,8 +340,8 @@ class TestSendMediaGroup(object):
             [InputMediaVideo(video_file), InputMediaPhoto(photo_file)])
         assert isinstance(messages, list)
         assert len(messages) == 2
-        assert all([isinstance(mes, Message) for mes in messages])
-        assert all([mes.media_group_id == messages[0].media_group_id for mes in messages])
+        assert all(isinstance(mes, Message) for mes in messages)
+        assert all(mes.media_group_id == messages[0].media_group_id for mes in messages)
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)

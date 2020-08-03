@@ -721,4 +721,4 @@ class Filters(object):
 
         def filter(self, message):
             return message.from_user.language_code and any(
-                [message.from_user.language_code.startswith(x) for x in self.lang])
+                message.from_user.language_code.startswith(x) for x in self.lang)
