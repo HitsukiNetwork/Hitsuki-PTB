@@ -42,7 +42,8 @@ class TestPassportElementErrorFiles(object):
         assert passport_element_error_files.file_hashes == self.file_hashes
         assert passport_element_error_files.message == self.message
 
-    def test_to_dict(self, passport_element_error_files):
+    @staticmethod
+    def test_to_dict(passport_element_error_files):
         passport_element_error_files_dict = passport_element_error_files.to_dict()
 
         assert isinstance(passport_element_error_files_dict, dict)

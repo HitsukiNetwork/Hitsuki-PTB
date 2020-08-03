@@ -31,7 +31,8 @@ class TestReplyKeyboardRemove(object):
     remove_keyboard = True
     selective = True
 
-    def test_send_message_with_reply_keyboard_remove(self, bot, chat_id, reply_keyboard_remove):
+    @staticmethod
+    def test_send_message_with_reply_keyboard_remove(bot, chat_id, reply_keyboard_remove):
         message = bot.send_message(chat_id, 'Text', reply_markup=reply_keyboard_remove)
 
         assert message.text == 'Text'
@@ -40,7 +41,8 @@ class TestReplyKeyboardRemove(object):
         assert reply_keyboard_remove.remove_keyboard == self.remove_keyboard
         assert reply_keyboard_remove.selective == self.selective
 
-    def test_to_dict(self, reply_keyboard_remove):
+    @staticmethod
+    def test_to_dict(reply_keyboard_remove):
         reply_keyboard_remove_dict = reply_keyboard_remove.to_dict()
 
         assert (

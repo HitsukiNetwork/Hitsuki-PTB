@@ -55,7 +55,8 @@ class TestPhoto(object):
     photo_file_url = 'https://python-telegram-bot.org/static/testfiles/telegram.jpg'
     file_size = 10209
 
-    def test_creation(self, thumb, photo):
+    @staticmethod
+    def test_creation(thumb, photo):
         # Make sure file has been uploaded.
         assert isinstance(photo, PhotoSize)
         assert isinstance(photo.file_id, str)
@@ -142,7 +143,8 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_get_and_download(self, bot, photo):
+    @staticmethod
+    def test_get_and_download(bot, photo):
         new_file = bot.getFile(photo.file_id)
 
         assert new_file.file_size == photo.file_size
@@ -174,7 +176,8 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_url_png_file(self, bot, chat_id):
+    @staticmethod
+    def test_send_url_png_file(bot, chat_id):
         message = bot.send_photo(photo='http://dummyimage.com/600x400/000/fff.png&text=telegram',
                                  chat_id=chat_id)
 
@@ -186,7 +189,8 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_url_gif_file(self, bot, chat_id):
+    @staticmethod
+    def test_send_url_gif_file(bot, chat_id):
         message = bot.send_photo(photo='http://dummyimage.com/600x400/000/fff.png&text=telegram',
                                  chat_id=chat_id)
 
@@ -198,7 +202,8 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_bytesio_jpg_file(self, bot, chat_id):
+    @staticmethod
+    def test_send_bytesio_jpg_file(bot, chat_id):
         file_name = 'tests/data/telegram_no_standard_header.jpg'
 
         # raw image bytes
@@ -223,7 +228,8 @@ class TestPhoto(object):
         assert photo.height == 720
         assert photo.file_size == 33372
 
-    def test_send_with_photosize(self, monkeypatch, bot, chat_id, photo):
+    @staticmethod
+    def test_send_with_photosize(monkeypatch, bot, chat_id, photo):
 
         def test(_, url, data, **kwargs):
             return data['photo'] == photo.file_id
@@ -234,7 +240,8 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, photo):
+    @staticmethod
+    def test_resend(bot, chat_id, photo):
         message = bot.send_photo(chat_id=chat_id, photo=photo.file_id)
 
         thumb, photo = message.photo
@@ -267,7 +274,8 @@ class TestPhoto(object):
         assert json_photo.height == self.height
         assert json_photo.file_size == self.file_size
 
-    def test_to_dict(self, photo):
+    @staticmethod
+    def test_to_dict(photo):
         photo_dict = photo.to_dict()
 
         assert isinstance(photo_dict, dict)
@@ -278,21 +286,25 @@ class TestPhoto(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_photo(chat_id=chat_id, photo=open(os.devnull, 'rb'))
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_photo(chat_id=chat_id, photo='')
 
-    def test_error_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_photo(chat_id=chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, photo):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, photo):
 
         def test(*args, **kwargs):
             return args[1] == photo.file_id

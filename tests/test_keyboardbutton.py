@@ -39,7 +39,8 @@ class TestKeyboardButton(object):
         assert keyboard_button.request_location == self.request_location
         assert keyboard_button.request_contact == self.request_contact
 
-    def test_to_dict(self, keyboard_button):
+    @staticmethod
+    def test_to_dict(keyboard_button):
         keyboard_button_dict = keyboard_button.to_dict()
 
         assert isinstance(keyboard_button_dict, dict)

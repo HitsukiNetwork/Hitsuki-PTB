@@ -61,7 +61,8 @@ class TestSuccessfulPayment(object):
         assert successful_payment.telegram_payment_charge_id == self.telegram_payment_charge_id
         assert successful_payment.provider_payment_charge_id == self.provider_payment_charge_id
 
-    def test_to_dict(self, successful_payment):
+    @staticmethod
+    def test_to_dict(successful_payment):
         successful_payment_dict = successful_payment.to_dict()
 
         assert isinstance(successful_payment_dict, dict)

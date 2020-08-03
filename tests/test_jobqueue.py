@@ -49,7 +49,8 @@ class TestJobQueue(object):
     def job_run_once(self, bot, job):
         self.result += 1
 
-    def job_with_exception(self, bot, job):
+    @staticmethod
+    def job_with_exception(bot, job):
         raise Exception('Test Error')
 
     def job_remove_self(self, bot, job):

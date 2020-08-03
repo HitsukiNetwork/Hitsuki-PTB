@@ -96,17 +96,20 @@ class TestUser(object):
         user.username = self.username
         assert user.name == '@username'
 
-    def test_full_name(self, user):
+    @staticmethod
+    def test_full_name(user):
         assert user.full_name == u'first\u2022name last\u2022name'
         user.last_name = None
         assert user.full_name == u'first\u2022name'
 
-    def test_link(self, user):
+    @staticmethod
+    def test_link(user):
         assert user.link == 'https://t.me/{}'.format(user.username)
         user.username = None
         assert user.link is None
 
-    def test_get_profile_photos(self, monkeypatch, user):
+    @staticmethod
+    def test_get_profile_photos(monkeypatch, user):
 
         def test(_, *args, **kwargs):
             return args[0] == user.id
@@ -114,7 +117,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.get_user_profile_photos', test)
         assert user.get_profile_photos()
 
-    def test_instance_method_send_message(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_message(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test'
@@ -122,7 +126,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_message', test)
         assert user.send_message('test')
 
-    def test_instance_method_send_photo(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_photo(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_photo'
@@ -130,7 +135,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_photo', test)
         assert user.send_photo('test_photo')
 
-    def test_instance_method_send_audio(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_audio(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_audio'
@@ -138,7 +144,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_audio', test)
         assert user.send_audio('test_audio')
 
-    def test_instance_method_send_document(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_document(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_document'
@@ -146,7 +153,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_document', test)
         assert user.send_document('test_document')
 
-    def test_instance_method_send_sticker(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_sticker(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_sticker'
@@ -154,7 +162,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_sticker', test)
         assert user.send_sticker('test_sticker')
 
-    def test_instance_method_send_video(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_video(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_video'
@@ -162,7 +171,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_video', test)
         assert user.send_video('test_video')
 
-    def test_instance_method_send_video_note(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_video_note(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_video_note'
@@ -170,7 +180,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_video_note', test)
         assert user.send_video_note('test_video_note')
 
-    def test_instance_method_send_voice(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_voice(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_voice'
@@ -178,7 +189,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_voice', test)
         assert user.send_voice('test_voice')
 
-    def test_instance_method_send_animation(self, monkeypatch, user):
+    @staticmethod
+    def test_instance_method_send_animation(monkeypatch, user):
 
         def test(*args, **kwargs):
             return args[1] == user.id and args[2] == 'test_animation'
@@ -186,7 +198,8 @@ class TestUser(object):
         monkeypatch.setattr('telegram.Bot.send_animation', test)
         assert user.send_animation('test_animation')
 
-    def test_mention_html(self, user):
+    @staticmethod
+    def test_mention_html(user):
         expected = u'<a href="tg://user?id={}">{}</a>'
 
         assert user.mention_html() == expected.format(user.id, user.full_name)
@@ -194,7 +207,8 @@ class TestUser(object):
             user.id, 'the&lt;b&gt;name\u2022')
         assert user.mention_html(user.username) == expected.format(user.id, user.username)
 
-    def test_mention_markdown(self, user):
+    @staticmethod
+    def test_mention_markdown(user):
         expected = u'[{}](tg://user?id={})'
 
         assert user.mention_markdown() == expected.format(user.full_name, user.id)

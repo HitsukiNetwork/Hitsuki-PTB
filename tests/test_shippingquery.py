@@ -51,7 +51,8 @@ class TestShippingQuery(object):
         assert shipping_query.from_user == self.from_user
         assert shipping_query.shipping_address == self.shipping_address
 
-    def test_to_dict(self, shipping_query):
+    @staticmethod
+    def test_to_dict(shipping_query):
         shipping_query_dict = shipping_query.to_dict()
 
         assert isinstance(shipping_query_dict, dict)
@@ -60,7 +61,8 @@ class TestShippingQuery(object):
         assert shipping_query_dict['from'] == shipping_query.from_user.to_dict()
         assert shipping_query_dict['shipping_address'] == shipping_query.shipping_address.to_dict()
 
-    def test_answer(self, monkeypatch, shipping_query):
+    @staticmethod
+    def test_answer(monkeypatch, shipping_query):
 
         def test(*args, **kwargs):
             return args[1] == shipping_query.id
