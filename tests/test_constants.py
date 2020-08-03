@@ -27,7 +27,8 @@ class TestConstants(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_max_message_length(self, bot, chat_id):
+    @staticmethod
+    def test_max_message_length(bot, chat_id):
         bot.send_message(chat_id=chat_id, text='a' * constants.MAX_MESSAGE_LENGTH)
 
         with pytest.raises(BadRequest,
@@ -37,7 +38,8 @@ class TestConstants(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_max_caption_length(self, bot, chat_id):
+    @staticmethod
+    def test_max_caption_length(bot, chat_id):
         good_caption = 'a' * constants.MAX_CAPTION_LENGTH
         with open('tests/data/telegram.png', 'rb') as f:
             good_msg = bot.send_photo(photo=f, caption=good_caption, chat_id=chat_id)

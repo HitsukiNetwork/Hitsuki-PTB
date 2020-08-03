@@ -25,7 +25,8 @@ from telegram.error import Unauthorized, InvalidToken, NetworkError, BadRequest,
 
 class TestErrors(object):
 
-    def test_telegram_error(self):
+    @staticmethod
+    def test_telegram_error():
         with pytest.raises(TelegramError, match="^test message$"):
             raise TelegramError("test message")
         with pytest.raises(TelegramError, match="^Test message$"):
@@ -35,7 +36,8 @@ class TestErrors(object):
         with pytest.raises(TelegramError, match="^Test message$"):
             raise TelegramError("Bad Request: test message")
 
-    def test_unauthorized(self):
+    @staticmethod
+    def test_unauthorized():
         with pytest.raises(Unauthorized, match="test message"):
             raise Unauthorized("test message")
         with pytest.raises(Unauthorized, match="^Test message$"):
@@ -45,11 +47,13 @@ class TestErrors(object):
         with pytest.raises(Unauthorized, match="^Test message$"):
             raise Unauthorized("Bad Request: test message")
 
-    def test_invalid_token(self):
+    @staticmethod
+    def test_invalid_token():
         with pytest.raises(InvalidToken, match="Invalid token"):
             raise InvalidToken
 
-    def test_network_error(self):
+    @staticmethod
+    def test_network_error():
         with pytest.raises(NetworkError, match="test message"):
             raise NetworkError("test message")
         with pytest.raises(NetworkError, match="^Test message$"):
@@ -59,7 +63,8 @@ class TestErrors(object):
         with pytest.raises(NetworkError, match="^Test message$"):
             raise NetworkError("Bad Request: test message")
 
-    def test_bad_request(self):
+    @staticmethod
+    def test_bad_request():
         with pytest.raises(BadRequest, match="test message"):
             raise BadRequest("test message")
         with pytest.raises(BadRequest, match="^Test message$"):
@@ -69,11 +74,13 @@ class TestErrors(object):
         with pytest.raises(BadRequest, match="^Test message$"):
             raise BadRequest("Bad Request: test message")
 
-    def test_timed_out(self):
+    @staticmethod
+    def test_timed_out():
         with pytest.raises(TimedOut, match="^Timed out$"):
             raise TimedOut
 
-    def test_chat_migrated(self):
+    @staticmethod
+    def test_chat_migrated():
         with pytest.raises(ChatMigrated, match="Group migrated to supergroup. New chat id: 1234"):
             raise ChatMigrated(1234)
         try:
@@ -81,6 +88,7 @@ class TestErrors(object):
         except ChatMigrated as e:
             assert e.new_chat_id == 1234
 
-    def test_retry_after(self):
+    @staticmethod
+    def test_retry_after():
         with pytest.raises(RetryAfter, match="Flood control exceeded. Retry in 12 seconds"):
             raise RetryAfter(12)

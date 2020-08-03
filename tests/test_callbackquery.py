@@ -66,7 +66,8 @@ class TestCallbackQuery(object):
         assert callback_query.inline_message_id == self.inline_message_id
         assert callback_query.game_short_name == self.game_short_name
 
-    def test_to_dict(self, callback_query):
+    @staticmethod
+    def test_to_dict(callback_query):
         callback_query_dict = callback_query.to_dict()
 
         assert isinstance(callback_query_dict, dict)
@@ -80,7 +81,8 @@ class TestCallbackQuery(object):
         assert callback_query_dict['data'] == callback_query.data
         assert callback_query_dict['game_short_name'] == callback_query.game_short_name
 
-    def test_answer(self, monkeypatch, callback_query):
+    @staticmethod
+    def test_answer(monkeypatch, callback_query):
 
         def test(*args, **kwargs):
             return args[1] == callback_query.id
@@ -89,7 +91,8 @@ class TestCallbackQuery(object):
         # TODO: PEP8
         assert callback_query.answer()
 
-    def test_edit_message_text(self, monkeypatch, callback_query):
+    @staticmethod
+    def test_edit_message_text(monkeypatch, callback_query):
 
         def test(*args, **kwargs):
             try:
@@ -105,7 +108,8 @@ class TestCallbackQuery(object):
         monkeypatch.setattr('telegram.Bot.edit_message_text', test)
         assert callback_query.edit_message_text(text='test')
 
-    def test_edit_message_caption(self, monkeypatch, callback_query):
+    @staticmethod
+    def test_edit_message_caption(monkeypatch, callback_query):
 
         def test(*args, **kwargs):
             try:
@@ -121,7 +125,8 @@ class TestCallbackQuery(object):
         monkeypatch.setattr('telegram.Bot.edit_message_caption', test)
         assert callback_query.edit_message_caption(caption='new caption')
 
-    def test_edit_message_reply_markup(self, monkeypatch, callback_query):
+    @staticmethod
+    def test_edit_message_reply_markup(monkeypatch, callback_query):
 
         def test(*args, **kwargs):
             try:

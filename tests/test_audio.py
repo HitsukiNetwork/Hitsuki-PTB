@@ -54,7 +54,8 @@ class TestAudio(object):
     thumb_width = 50
     thumb_height = 50
 
-    def test_creation(self, audio):
+    @staticmethod
+    def test_creation(audio):
         # Make sure file has been uploaded.
         assert isinstance(audio, Audio)
         assert isinstance(audio.file_id, str)
@@ -126,12 +127,14 @@ class TestAudio(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_resend(self, bot, chat_id, audio):
+    @staticmethod
+    def test_resend(bot, chat_id, audio):
         message = bot.send_audio(chat_id=chat_id, audio=audio.file_id)
 
         assert message.audio == audio
 
-    def test_send_with_audio(self, monkeypatch, bot, chat_id, audio):
+    @staticmethod
+    def test_send_with_audio(monkeypatch, bot, chat_id, audio):
 
         def test(_, url, data, **kwargs):
             return data['audio'] == audio.file_id
@@ -161,7 +164,8 @@ class TestAudio(object):
         assert json_audio.file_size == self.file_size
         assert json_audio.thumb == audio.thumb
 
-    def test_to_dict(self, audio):
+    @staticmethod
+    def test_to_dict(audio):
         audio_dict = audio.to_dict()
 
         assert isinstance(audio_dict, dict)
@@ -172,7 +176,8 @@ class TestAudio(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         audio_file = open(os.devnull, 'rb')
 
         with pytest.raises(TelegramError):
@@ -180,15 +185,18 @@ class TestAudio(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_audio(chat_id=chat_id, audio='')
 
-    def test_error_send_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_audio(chat_id=chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, audio):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, audio):
 
         def test(*args, **kwargs):
             return args[1] == audio.file_id
@@ -196,7 +204,8 @@ class TestAudio(object):
         monkeypatch.setattr('telegram.Bot.get_file', test)
         assert audio.get_file()
 
-    def test_equality(self, audio):
+    @staticmethod
+    def test_equality(audio):
         a = Audio(audio.file_id, audio.duration)
         b = Audio(audio.file_id, audio.duration)
         c = Audio(audio.file_id, 0)

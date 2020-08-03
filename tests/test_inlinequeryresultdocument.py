@@ -71,7 +71,8 @@ class TestInlineQueryResultDocument(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_document.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_document):
+    @staticmethod
+    def test_to_dict(inline_query_result_document):
         inline_query_result_document_dict = inline_query_result_document.to_dict()
 
         assert isinstance(inline_query_result_document_dict, dict)

@@ -49,7 +49,8 @@ class TestAnimation(object):
     file_size = 4135
     caption = "Test *animation*"
 
-    def test_creation(self, animation):
+    @staticmethod
+    def test_creation(animation):
         assert isinstance(animation, Animation)
         assert isinstance(animation.file_id, str)
         assert animation.file_id is not ''
@@ -84,7 +85,8 @@ class TestAnimation(object):
         assert message.animation.thumb.height == 50
 
     @flaky(3, 1)
-    def test_resend(self, bot, chat_id, animation):
+    @staticmethod
+    def test_resend(bot, chat_id, animation):
         message = bot.send_animation(chat_id, animation.file_id)
 
         assert isinstance(message.animation, Animation)
@@ -112,7 +114,8 @@ class TestAnimation(object):
         assert animation.mime_type == self.mime_type
         assert animation.file_size == self.file_size
 
-    def test_to_dict(self, animation):
+    @staticmethod
+    def test_to_dict(animation):
         animation_dict = animation.to_dict()
 
         assert isinstance(animation_dict, dict)

@@ -61,7 +61,8 @@ class TestChosenInlineResult(object):
         assert result.location == loc
         assert result.inline_message_id == 'a random id'
 
-    def test_to_dict(self, chosen_inline_result):
+    @staticmethod
+    def test_to_dict(chosen_inline_result):
         chosen_inline_result_dict = chosen_inline_result.to_dict()
 
         assert isinstance(chosen_inline_result_dict, dict)

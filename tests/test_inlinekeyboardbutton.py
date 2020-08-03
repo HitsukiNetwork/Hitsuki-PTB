@@ -53,7 +53,8 @@ class TestInlineKeyboardButton(object):
         assert inline_keyboard_button.callback_game == self.callback_game
         assert inline_keyboard_button.pay == self.pay
 
-    def test_to_dict(self, inline_keyboard_button):
+    @staticmethod
+    def test_to_dict(inline_keyboard_button):
         inline_keyboard_button_dict = inline_keyboard_button.to_dict()
 
         assert isinstance(inline_keyboard_button_dict, dict)

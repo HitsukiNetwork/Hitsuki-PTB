@@ -31,7 +31,8 @@ class TestForceReply(object):
     force_reply = True
     selective = True
 
-    def test_send_message_with_force_reply(self, bot, chat_id, force_reply):
+    @staticmethod
+    def test_send_message_with_force_reply(bot, chat_id, force_reply):
         message = bot.send_message(chat_id, 'text', reply_markup=force_reply)
 
         assert message.text == 'text'
@@ -40,7 +41,8 @@ class TestForceReply(object):
         assert force_reply.force_reply == self.force_reply
         assert force_reply.selective == self.selective
 
-    def test_to_dict(self, force_reply):
+    @staticmethod
+    def test_to_dict(force_reply):
         force_reply_dict = force_reply.to_dict()
 
         assert isinstance(force_reply_dict, dict)

@@ -48,7 +48,8 @@ class TestInputVenueMessageContent(object):
         assert input_venue_message_content.foursquare_id == self.foursquare_id
         assert input_venue_message_content.foursquare_type == self.foursquare_type
 
-    def test_to_dict(self, input_venue_message_content):
+    @staticmethod
+    def test_to_dict(input_venue_message_content):
         input_venue_message_content_dict = input_venue_message_content.to_dict()
 
         assert isinstance(input_venue_message_content_dict, dict)

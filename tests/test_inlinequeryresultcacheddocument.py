@@ -60,7 +60,8 @@ class TestInlineQueryResultCachedDocument(object):
         assert (inline_query_result_cached_document.reply_markup.to_dict() ==
                 self.reply_markup.to_dict())
 
-    def test_to_dict(self, inline_query_result_cached_document):
+    @staticmethod
+    def test_to_dict(inline_query_result_cached_document):
         inline_query_result_cached_document_dict = inline_query_result_cached_document.to_dict()
 
         assert isinstance(inline_query_result_cached_document_dict, dict)

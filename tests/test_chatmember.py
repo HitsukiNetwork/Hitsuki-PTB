@@ -84,13 +84,15 @@ class TestChatMember(object):
         assert chat_member.can_send_other_messages is False
         assert chat_member.can_add_web_page_previews is True
 
-    def test_to_dict(self, chat_member):
+    @staticmethod
+    def test_to_dict(chat_member):
         chat_member_dict = chat_member.to_dict()
         assert isinstance(chat_member_dict, dict)
         assert chat_member_dict['user'] == chat_member.user.to_dict()
         assert chat_member['status'] == chat_member.status
 
-    def test_equality(self):
+    @staticmethod
+    def test_equality():
         a = ChatMember(User(1, '', False), ChatMember.ADMINISTRATOR)
         b = ChatMember(User(1, '', False), ChatMember.ADMINISTRATOR)
         d = ChatMember(User(2, '', False), ChatMember.ADMINISTRATOR)

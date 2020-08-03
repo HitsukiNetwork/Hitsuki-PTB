@@ -65,7 +65,8 @@ class TestInlineQueryResultArticle(object):
         assert inline_query_result_article.thumb_height == self.thumb_height
         assert inline_query_result_article.thumb_width == self.thumb_width
 
-    def test_to_dict(self, inline_query_result_article):
+    @staticmethod
+    def test_to_dict(inline_query_result_article):
         inline_query_result_article_dict = inline_query_result_article.to_dict()
 
         assert isinstance(inline_query_result_article_dict, dict)

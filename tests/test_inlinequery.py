@@ -55,7 +55,8 @@ class TestInlineQuery(object):
         assert inline_query_json.query == self.query
         assert inline_query_json.offset == self.offset
 
-    def test_to_dict(self, inline_query):
+    @staticmethod
+    def test_to_dict(inline_query):
         inline_query_dict = inline_query.to_dict()
 
         assert isinstance(inline_query_dict, dict)
@@ -65,7 +66,8 @@ class TestInlineQuery(object):
         assert inline_query_dict['query'] == inline_query.query
         assert inline_query_dict['offset'] == inline_query.offset
 
-    def test_answer(self, monkeypatch, inline_query):
+    @staticmethod
+    def test_answer(monkeypatch, inline_query):
 
         def test(*args, **kwargs):
             return args[1] == inline_query.id

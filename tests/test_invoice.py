@@ -55,7 +55,8 @@ class TestInvoice(object):
         assert invoice_json.currency == self.currency
         assert invoice_json.total_amount == self.total_amount
 
-    def test_to_dict(self, invoice):
+    @staticmethod
+    def test_to_dict(invoice):
         invoice_dict = invoice.to_dict()
 
         assert isinstance(invoice_dict, dict)

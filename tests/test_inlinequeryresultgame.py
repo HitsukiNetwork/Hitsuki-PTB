@@ -42,7 +42,8 @@ class TestInlineQueryResultGame(object):
         assert inline_query_result_game.game_short_name == self.game_short_name
         assert (inline_query_result_game.reply_markup.to_dict() == self.reply_markup.to_dict())
 
-    def test_to_dict(self, inline_query_result_game):
+    @staticmethod
+    def test_to_dict(inline_query_result_game):
         inline_query_result_game_dict = inline_query_result_game.to_dict()
 
         assert isinstance(inline_query_result_game_dict, dict)

@@ -33,7 +33,8 @@ class TestInlineKeyboardMarkup(object):
         InlineKeyboardButton(text='button2', callback_data='data2')
     ]]
 
-    def test_send_message_with_inline_keyboard_markup(self, bot, chat_id, inline_keyboard_markup):
+    @staticmethod
+    def test_send_message_with_inline_keyboard_markup(bot, chat_id, inline_keyboard_markup):
         message = bot.send_message(chat_id,
                                    'Testing InlineKeyboardMarkup',
                                    reply_markup=inline_keyboard_markup)

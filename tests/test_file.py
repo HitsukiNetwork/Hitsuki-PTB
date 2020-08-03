@@ -53,7 +53,8 @@ class TestFile(object):
         assert new_file.file_path == self.file_path
         assert new_file.file_size == self.file_size
 
-    def test_to_dict(self, file):
+    @staticmethod
+    def test_to_dict(file):
         file_dict = file.to_dict()
 
         assert isinstance(file_dict, dict)
@@ -63,7 +64,8 @@ class TestFile(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_get_empty_file_id(self, bot):
+    @staticmethod
+    def test_error_get_empty_file_id(bot):
         with pytest.raises(TelegramError):
             bot.get_file(file_id='')
 
