@@ -1,58 +1,8 @@
-.. image:: https://github.com/python-telegram-bot/logos/blob/master/logo-text/png/ptb-logo-text_768.png?raw=true
-   :align: center
-   :target: https://python-telegram-bot.org
-   :alt: python-telegram-bot Logo
+=================
+Hitsuki PTB
+=================
 
-We have made you a wrapper you can't refuse
-
-We have a vibrant community of developers helping each other in our `Telegram group <https://telegram.me/pythontelegrambotgroup>`_. Join us!
-
-*Stay tuned for library updates and new releases on our* `Telegram Channel <https://telegram.me/pythontelegrambotchannel>`_.
-
-.. image:: https://img.shields.io/pypi/v/python-telegram-bot.svg
-   :target: https://pypi.org/project/python-telegram-bot/
-   :alt: PyPi Package Version
-
-.. image:: https://img.shields.io/pypi/pyversions/python-telegram-bot.svg
-   :target: https://pypi.org/project/python-telegram-bot/
-   :alt: Supported Python versions
-
-.. image:: https://www.cpu.re/static/python-telegram-bot/downloads.svg
-   :target: https://www.cpu.re/static/python-telegram-bot/downloads-by-python-version.txt
-   :alt: PyPi Package Monthly Download
-
-.. image:: https://img.shields.io/badge/docs-latest-af1a97.svg
-   :target: https://python-telegram-bot.readthedocs.io/
-   :alt: Documentation Status
-
-.. image:: https://img.shields.io/pypi/l/python-telegram-bot.svg
-   :target: https://www.gnu.org/licenses/lgpl-3.0.html
-   :alt: LGPLv3 License
-
-.. image:: https://travis-ci.org/python-telegram-bot/python-telegram-bot.svg?branch=master
-   :target: https://travis-ci.org/python-telegram-bot/python-telegram-bot
-   :alt: Travis CI Status
-
-.. image:: https://img.shields.io/appveyor/ci/python-telegram-bot/python-telegram-bot/master.svg?logo=appveyor
-   :target: https://ci.appveyor.com/project/python-telegram-bot/python-telegram-bot
-   :alt: AppVeyor CI Status
-
-
-.. image:: https://codecov.io/gh/python-telegram-bot/python-telegram-bot/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/python-telegram-bot/python-telegram-bot
-   :alt: Code coverage
-   
-.. image:: http://isitmaintained.com/badge/resolution/python-telegram-bot/python-telegram-bot.svg
-   :target: http://isitmaintained.com/project/python-telegram-bot/python-telegram-bot
-   :alt: Median time to resolve an issue
-
-.. image:: https://img.shields.io/badge/Telegram-Group-blue.svg
-   :target: https://telegram.me/pythontelegrambotgroup
-   :alt: Telegram Group
-
-.. image:: https://img.shields.io/badge/IRC-Channel-blue.svg
-   :target: https://webchat.freenode.net/?channels=##python-telegram-bot
-   :alt: IRC Bridge
+Hitsuki-PTB is a fork of python-telegram-bot with rapidjson and some code improvements
 
 =================
 Table of contents
@@ -101,18 +51,12 @@ All types and methods of the Telegram Bot API **4.1** are supported.
 Installing
 ==========
 
-You can install or upgrade python-telegram-bot with:
+You can install from source with:
 
 .. code:: shell
 
-    $ pip install python-telegram-bot --upgrade
-
-Or you can install from source with:
-
-.. code:: shell
-
-    $ git clone https://github.com/python-telegram-bot/python-telegram-bot --recursive
-    $ cd python-telegram-bot
+    $ git clone https://github.com/HitsukiNetwork/Hitsuki-PTB --recursive
+    $ cd Hitsuki-PTB
     $ python setup.py install
     
 In case you have a previously cloned local repository already, you should initialize the added urllib3 submodule before installing with:
@@ -173,34 +117,6 @@ If you want DEBUG logs instead:
 .. code:: python
 
     logger.setLevel(logging.DEBUG)
-
-
-=============
-Documentation
-=============
-
-``python-telegram-bot``'s documentation lives at `readthedocs.io <https://python-telegram-bot.readthedocs.io/>`_.
-
-============
-Getting help
-============
-
-You can get help in several ways:
-
-1. We have a vibrant community of developers helping each other in our `Telegram group <https://telegram.me/pythontelegrambotgroup>`_. Join us!
-
-2. Our `Wiki pages <https://github.com/python-telegram-bot/python-telegram-bot/wiki/>`_ offer a growing amount of resources.
-
-3. You can ask for help on Stack Overflow using the `python-telegram-bot tag <https://stackoverflow.com/questions/tagged/python-telegram-bot>`_.
-
-4. As last resort, the developers are ready to help you with `serious issues <https://github.com/python-telegram-bot/python-telegram-bot/issues/new>`_.
-
-
-============
-Contributing
-============
-
-Contributions of all sizes are welcome. Please review our `contribution guidelines <https://github.com/python-telegram-bot/python-telegram-bot/blob/master/.github/CONTRIBUTING.rst>`_ to get started. You can also help by `reporting bugs <https://github.com/python-telegram-bot/python-telegram-bot/issues/new>`_.
 
 =======
 License
