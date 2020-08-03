@@ -332,7 +332,7 @@ class Dispatcher(object):
             raise TypeError('group is not int')
 
         if group not in self.handlers:
-            self.handlers[group] = list()
+            self.handlers[group] = []
             self.groups.append(group)
             self.groups = sorted(self.groups)
 

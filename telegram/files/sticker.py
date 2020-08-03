@@ -94,7 +94,7 @@ class Sticker(TelegramObject):
     @classmethod
     def de_list(cls, data, bot):
         if not data:
-            return list()
+            return []
 
         return [cls.de_json(d, bot) for d in data]
 

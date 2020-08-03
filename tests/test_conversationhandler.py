@@ -49,7 +49,7 @@ class TestConversationHandler(object):
     # Test related
     @pytest.fixture(autouse=True)
     def reset(self):
-        self.current_state = dict()
+        self.current_state = {}
         self.entry_points = [CommandHandler('start', self.start)]
         self.states = {
             self.THIRSTY: [CommandHandler('brew', self.brew),

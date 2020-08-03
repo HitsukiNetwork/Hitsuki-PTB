@@ -57,7 +57,7 @@ class TelegramObject(object):
         return json.dumps(self.to_dict())
 
     def to_dict(self):
-        data = dict()
+        data = {}
 
         for key in iter(self.__dict__):
             if key in ('bot', '_id_attrs', '_credentials', '_decrypted_credentials',

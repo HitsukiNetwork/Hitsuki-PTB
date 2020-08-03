@@ -145,8 +145,8 @@ class ConversationHandler(Handler):
         self.per_message = per_message
         self.conversation_timeout = conversation_timeout
 
-        self.timeout_jobs = dict()
-        self.conversations = dict()
+        self.timeout_jobs = {}
+        self.conversations = {}
         self.current_conversation = None
         self.current_handler = None
 
@@ -159,7 +159,7 @@ class ConversationHandler(Handler):
             logging.warning("If 'per_message=True' is used, 'per_chat=True' should also be used, "
                             "since message IDs are not globally unique.")
 
-        all_handlers = list()
+        all_handlers = []
         all_handlers.extend(entry_points)
         all_handlers.extend(fallbacks)
 
@@ -188,7 +188,7 @@ class ConversationHandler(Handler):
         chat = update.effective_chat
         user = update.effective_user
 
-        key = list()
+        key = []
 
         if self.per_chat:
             key.append(chat.id)

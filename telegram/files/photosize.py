@@ -64,7 +64,7 @@ class PhotoSize(TelegramObject):
         if not data:
             return []
 
-        photos = list()
+        photos = []
         for photo in data:
             photos.append(cls.de_json(photo, bot))
 

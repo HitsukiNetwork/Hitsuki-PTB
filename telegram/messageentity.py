@@ -69,9 +69,9 @@ class MessageEntity(TelegramObject):
     @classmethod
     def de_list(cls, data, bot):
         if not data:
-            return list()
+            return []
 
-        entities = list()
+        entities = []
         for entity in data:
             entities.append(cls.de_json(entity, bot))
 
