@@ -26,13 +26,15 @@ from telegram.utils import helpers
 
 class TestHelpers(object):
 
-    def test_escape_markdown(self):
+    @staticmethod
+    def test_escape_markdown():
         test_str = '*bold*, _italic_, `code`, [text_link](http://github.com/)'
         expected_str = '\*bold\*, \_italic\_, \`code\`, \[text\_link](http://github.com/)'
 
         assert expected_str == helpers.escape_markdown(test_str)
 
-    def test_effective_message_type(self):
+    @staticmethod
+    def test_effective_message_type():
         test_message = Message(message_id=1, from_user=None, date=None, chat=None)
 
         test_message.text = 'Test'
@@ -54,12 +56,14 @@ class TestHelpers(object):
         empty_update = Update(2)
         assert helpers.effective_message_type(empty_update) is None
 
-    def test_mention_html(self):
+    @staticmethod
+    def test_mention_html():
         expected = '<a href="tg://user?id=1">the name</a>'
 
         assert expected == helpers.mention_html(1, 'the name')
 
-    def test_mention_markdown(self):
+    @staticmethod
+    def test_mention_markdown():
         expected = '[the name](tg://user?id=1)'
 
         assert expected == helpers.mention_markdown(1, 'the name')

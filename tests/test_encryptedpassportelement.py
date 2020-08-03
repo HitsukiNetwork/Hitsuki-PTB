@@ -54,7 +54,8 @@ class TestEncryptedPassportElement(object):
         assert encrypted_passport_element.reverse_side == self.reverse_side
         assert encrypted_passport_element.selfie == self.selfie
 
-    def test_to_dict(self, encrypted_passport_element):
+    @staticmethod
+    def test_to_dict(encrypted_passport_element):
         encrypted_passport_element_dict = encrypted_passport_element.to_dict()
 
         assert isinstance(encrypted_passport_element_dict, dict)

@@ -103,7 +103,8 @@ class TestInputMediaVideo(object):
         assert input_media_video.supports_streaming == self.supports_streaming
         assert isinstance(input_media_video.thumb, InputFile)
 
-    def test_to_dict(self, input_media_video):
+    @staticmethod
+    def test_to_dict(input_media_video):
         input_media_video_dict = input_media_video.to_dict()
         assert input_media_video_dict['type'] == input_media_video.type
         assert input_media_video_dict['media'] == input_media_video.media
@@ -144,7 +145,8 @@ class TestInputMediaPhoto(object):
         assert input_media_photo.caption == self.caption
         assert input_media_photo.parse_mode == self.parse_mode
 
-    def test_to_dict(self, input_media_photo):
+    @staticmethod
+    def test_to_dict(input_media_photo):
         input_media_photo_dict = input_media_photo.to_dict()
         assert input_media_photo_dict['type'] == input_media_photo.type
         assert input_media_photo_dict['media'] == input_media_photo.media
@@ -182,7 +184,8 @@ class TestInputMediaAnimation(object):
         assert input_media_animation.parse_mode == self.parse_mode
         assert isinstance(input_media_animation.thumb, InputFile)
 
-    def test_to_dict(self, input_media_animation):
+    @staticmethod
+    def test_to_dict(input_media_animation):
         input_media_animation_dict = input_media_animation.to_dict()
         assert input_media_animation_dict['type'] == input_media_animation.type
         assert input_media_animation_dict['media'] == input_media_animation.media
@@ -226,7 +229,8 @@ class TestInputMediaAudio(object):
         assert input_media_audio.parse_mode == self.parse_mode
         assert isinstance(input_media_audio.thumb, InputFile)
 
-    def test_to_dict(self, input_media_audio):
+    @staticmethod
+    def test_to_dict(input_media_audio):
         input_media_audio_dict = input_media_audio.to_dict()
         assert input_media_audio_dict['type'] == input_media_audio.type
         assert input_media_audio_dict['media'] == input_media_audio.media
@@ -267,7 +271,8 @@ class TestInputMediaDocument(object):
         assert input_media_document.parse_mode == self.parse_mode
         assert isinstance(input_media_document.thumb, InputFile)
 
-    def test_to_dict(self, input_media_document):
+    @staticmethod
+    def test_to_dict(input_media_document):
         input_media_document_dict = input_media_document.to_dict()
         assert input_media_document_dict['type'] == input_media_document.type
         assert input_media_document_dict['media'] == input_media_document.media
@@ -301,7 +306,8 @@ class TestSendMediaGroup(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_media_group_photo(self, bot, chat_id, media_group):
+    @staticmethod
+    def test_send_media_group_photo(bot, chat_id, media_group):
         messages = bot.send_media_group(chat_id, media_group)
         assert isinstance(messages, list)
         assert len(messages) == 2
@@ -310,7 +316,8 @@ class TestSendMediaGroup(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_media_group_all_args(self, bot, chat_id, media_group):
+    @staticmethod
+    def test_send_media_group_all_args(bot, chat_id, media_group):
         m1 = bot.send_message(chat_id, text="test")
         messages = bot.send_media_group(chat_id,
                                         media_group,
@@ -321,8 +328,8 @@ class TestSendMediaGroup(object):
         assert all([isinstance(mes, Message) for mes in messages])
         assert all([mes.media_group_id == messages[0].media_group_id for mes in messages])
 
+    @staticmethod
     def test_send_media_group_new_files(
-        self,
         bot,
         chat_id,
         video_file,
@@ -338,7 +345,8 @@ class TestSendMediaGroup(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_edit_message_media(self, bot, chat_id, media_group):
+    @staticmethod
+    def test_edit_message_media(bot, chat_id, media_group):
         messages = bot.send_media_group(chat_id, media_group)
         cid = messages[-1].chat.id
         mid = messages[-1].message_id
@@ -347,7 +355,8 @@ class TestSendMediaGroup(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_edit_message_media_new_file(self, bot, chat_id, media_group, thumb_file):
+    @staticmethod
+    def test_edit_message_media_new_file(bot, chat_id, media_group, thumb_file):
         messages = bot.send_media_group(chat_id, media_group)
         cid = messages[-1].chat.id
         mid = messages[-1].message_id

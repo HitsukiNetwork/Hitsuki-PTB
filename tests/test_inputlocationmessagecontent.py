@@ -39,7 +39,8 @@ class TestInputLocationMessageContent(object):
         assert input_location_message_content.latitude == self.latitude
         assert input_location_message_content.live_period == self.live_period
 
-    def test_to_dict(self, input_location_message_content):
+    @staticmethod
+    def test_to_dict(input_location_message_content):
         input_location_message_content_dict = input_location_message_content.to_dict()
 
         assert isinstance(input_location_message_content_dict, dict)

@@ -64,7 +64,8 @@ class TestChat(object):
         assert chat.sticker_set_name == self.sticker_set_name
         assert chat.can_set_sticker_set == self.can_set_sticker_set
 
-    def test_to_dict(self, chat):
+    @staticmethod
+    def test_to_dict(chat):
         chat_dict = chat.to_dict()
 
         assert isinstance(chat_dict, dict)
@@ -74,12 +75,14 @@ class TestChat(object):
         assert chat_dict['username'] == chat.username
         assert chat_dict['all_members_are_administrators'] == chat.all_members_are_administrators
 
-    def test_link(self, chat):
+    @staticmethod
+    def test_link(chat):
         assert chat.link == 'https://t.me/{}'.format(chat.username)
         chat.username = None
         assert chat.link is None
 
-    def test_send_action(self, monkeypatch, chat):
+    @staticmethod
+    def test_send_action(monkeypatch, chat):
 
         def test(*args, **kwargs):
             id = args[1] == chat.id
@@ -89,7 +92,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_chat_action', test)
         assert chat.send_action(action=ChatAction.TYPING)
 
-    def test_leave(self, monkeypatch, chat):
+    @staticmethod
+    def test_leave(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id
@@ -97,7 +101,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.leave_chat', test)
         assert chat.leave()
 
-    def test_get_administrators(self, monkeypatch, chat):
+    @staticmethod
+    def test_get_administrators(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id
@@ -105,7 +110,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.get_chat_administrators', test)
         assert chat.get_administrators()
 
-    def test_get_members_count(self, monkeypatch, chat):
+    @staticmethod
+    def test_get_members_count(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id
@@ -113,7 +119,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.get_chat_members_count', test)
         assert chat.get_members_count()
 
-    def test_get_member(self, monkeypatch, chat):
+    @staticmethod
+    def test_get_member(monkeypatch, chat):
 
         def test(*args, **kwargs):
             chat_id = args[1] == chat.id
@@ -123,7 +130,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.get_chat_member', test)
         assert chat.get_member(42)
 
-    def test_kick_member(self, monkeypatch, chat):
+    @staticmethod
+    def test_kick_member(monkeypatch, chat):
 
         def test(*args, **kwargs):
             chat_id = args[1] == chat.id
@@ -134,7 +142,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.kick_chat_member', test)
         assert chat.kick_member(42, until_date=43)
 
-    def test_unban_member(self, monkeypatch, chat):
+    @staticmethod
+    def test_unban_member(monkeypatch, chat):
 
         def test(*args, **kwargs):
             chat_id = args[1] == chat.id
@@ -144,7 +153,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.unban_chat_member', test)
         assert chat.unban_member(42)
 
-    def test_instance_method_send_message(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_message(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test'
@@ -152,7 +162,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_message', test)
         assert chat.send_message('test')
 
-    def test_instance_method_send_photo(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_photo(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_photo'
@@ -160,7 +171,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_photo', test)
         assert chat.send_photo('test_photo')
 
-    def test_instance_method_send_audio(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_audio(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_audio'
@@ -168,7 +180,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_audio', test)
         assert chat.send_audio('test_audio')
 
-    def test_instance_method_send_document(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_document(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_document'
@@ -176,7 +189,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_document', test)
         assert chat.send_document('test_document')
 
-    def test_instance_method_send_sticker(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_sticker(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_sticker'
@@ -184,7 +198,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_sticker', test)
         assert chat.send_sticker('test_sticker')
 
-    def test_instance_method_send_video(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_video(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_video'
@@ -192,7 +207,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_video', test)
         assert chat.send_video('test_video')
 
-    def test_instance_method_send_video_note(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_video_note(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_video_note'
@@ -200,7 +216,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_video_note', test)
         assert chat.send_video_note('test_video_note')
 
-    def test_instance_method_send_voice(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_voice(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_voice'
@@ -208,7 +225,8 @@ class TestChat(object):
         monkeypatch.setattr('telegram.Bot.send_voice', test)
         assert chat.send_voice('test_voice')
 
-    def test_instance_method_send_animation(self, monkeypatch, chat):
+    @staticmethod
+    def test_instance_method_send_animation(monkeypatch, chat):
 
         def test(*args, **kwargs):
             return args[1] == chat.id and args[2] == 'test_animation'

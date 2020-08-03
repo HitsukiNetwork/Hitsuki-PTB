@@ -68,7 +68,8 @@ class TestInlineQueryResultPhoto(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_photo.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_photo):
+    @staticmethod
+    def test_to_dict(inline_query_result_photo):
         inline_query_result_photo_dict = inline_query_result_photo.to_dict()
 
         assert isinstance(inline_query_result_photo_dict, dict)

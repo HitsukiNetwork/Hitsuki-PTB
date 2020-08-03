@@ -48,7 +48,8 @@ class TestInputFile(object):
             # to kill it.
             pass
 
-    def test_mimetypes(self):
+    @staticmethod
+    def test_mimetypes():
         # Only test a few to make sure logic works okay
         assert InputFile(open('tests/data/telegram.jpg', 'rb')).mimetype == 'image/jpeg'
         if sys.version_info >= (3, 5):

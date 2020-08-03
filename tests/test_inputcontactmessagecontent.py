@@ -39,7 +39,8 @@ class TestInputContactMessageContent(object):
         assert input_contact_message_content.phone_number == self.phone_number
         assert input_contact_message_content.last_name == self.last_name
 
-    def test_to_dict(self, input_contact_message_content):
+    @staticmethod
+    def test_to_dict(input_contact_message_content):
         input_contact_message_content_dict = input_contact_message_content.to_dict()
 
         assert isinstance(input_contact_message_content_dict, dict)

@@ -62,7 +62,8 @@ class TestInlineQueryResultAudio(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_audio.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_audio):
+    @staticmethod
+    def test_to_dict(inline_query_result_audio):
         inline_query_result_audio_dict = inline_query_result_audio.to_dict()
 
         assert isinstance(inline_query_result_audio_dict, dict)

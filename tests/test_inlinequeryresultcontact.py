@@ -62,7 +62,8 @@ class TestInlineQueryResultContact(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_contact.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_contact):
+    @staticmethod
+    def test_to_dict(inline_query_result_contact):
         inline_query_result_contact_dict = inline_query_result_contact.to_dict()
 
         assert isinstance(inline_query_result_contact_dict, dict)

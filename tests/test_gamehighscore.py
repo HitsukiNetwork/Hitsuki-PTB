@@ -41,7 +41,8 @@ class TestGameHighScore(object):
         assert highscore.user == self.user
         assert highscore.score == self.score
 
-    def test_to_dict(self, game_highscore):
+    @staticmethod
+    def test_to_dict(game_highscore):
         game_highscore_dict = game_highscore.to_dict()
 
         assert isinstance(game_highscore_dict, dict)

@@ -57,7 +57,8 @@ class TestInlineQueryResultCachedMpeg4Gif(object):
         assert (inline_query_result_cached_mpeg4_gif.reply_markup.to_dict() ==
                 self.reply_markup.to_dict())
 
-    def test_to_dict(self, inline_query_result_cached_mpeg4_gif):
+    @staticmethod
+    def test_to_dict(inline_query_result_cached_mpeg4_gif):
         inline_query_result_cached_mpeg4_gif_dict = inline_query_result_cached_mpeg4_gif.to_dict()
 
         assert isinstance(inline_query_result_cached_mpeg4_gif_dict, dict)

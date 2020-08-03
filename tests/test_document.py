@@ -47,7 +47,8 @@ class TestDocument(object):
     thumb_width = 90
     thumb_height = 90
 
-    def test_creation(self, document):
+    @staticmethod
+    def test_creation(document):
         assert isinstance(document, Document)
         assert isinstance(document.file_id, str)
         assert document.file_id is not ''
@@ -84,7 +85,8 @@ class TestDocument(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_get_and_download(self, bot, document):
+    @staticmethod
+    def test_get_and_download(bot, document):
         new_file = bot.get_file(document.file_id)
 
         assert new_file.file_size == document.file_size
@@ -112,12 +114,14 @@ class TestDocument(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_send_resend(self, bot, chat_id, document):
+    @staticmethod
+    def test_send_resend(bot, chat_id, document):
         message = bot.send_document(chat_id=chat_id, document=document.file_id)
 
         assert message.document == document
 
-    def test_send_with_document(self, monkeypatch, bot, chat_id, document):
+    @staticmethod
+    def test_send_with_document(monkeypatch, bot, chat_id, document):
 
         def test(_, url, data, **kwargs):
             return data['document'] == document.file_id
@@ -144,7 +148,8 @@ class TestDocument(object):
         assert test_document.mime_type == self.mime_type
         assert test_document.file_size == self.file_size
 
-    def test_to_dict(self, document):
+    @staticmethod
+    def test_to_dict(document):
         document_dict = document.to_dict()
 
         assert isinstance(document_dict, dict)
@@ -155,22 +160,26 @@ class TestDocument(object):
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file(bot, chat_id):
         with open(os.devnull, 'rb') as f:
             with pytest.raises(TelegramError):
                 bot.send_document(chat_id=chat_id, document=f)
 
     @flaky(3, 1)
     @pytest.mark.timeout(10)
-    def test_error_send_empty_file_id(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_empty_file_id(bot, chat_id):
         with pytest.raises(TelegramError):
             bot.send_document(chat_id=chat_id, document='')
 
-    def test_error_send_without_required_args(self, bot, chat_id):
+    @staticmethod
+    def test_error_send_without_required_args(bot, chat_id):
         with pytest.raises(TypeError):
             bot.send_document(chat_id=chat_id)
 
-    def test_get_file_instance_method(self, monkeypatch, document):
+    @staticmethod
+    def test_get_file_instance_method(monkeypatch, document):
 
         def test(*args, **kwargs):
             return args[1] == document.file_id
@@ -178,7 +187,8 @@ class TestDocument(object):
         monkeypatch.setattr('telegram.Bot.get_file', test)
         assert document.get_file()
 
-    def test_equality(self, document):
+    @staticmethod
+    def test_equality(document):
         a = Document(document.file_id)
         b = Document(document.file_id)
         d = Document('')

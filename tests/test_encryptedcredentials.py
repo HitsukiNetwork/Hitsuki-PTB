@@ -38,7 +38,8 @@ class TestEncryptedCredentials(object):
         assert encrypted_credentials.hash == self.hash
         assert encrypted_credentials.secret == self.secret
 
-    def test_to_dict(self, encrypted_credentials):
+    @staticmethod
+    def test_to_dict(encrypted_credentials):
         encrypted_credentials_dict = encrypted_credentials.to_dict()
 
         assert isinstance(encrypted_credentials_dict, dict)

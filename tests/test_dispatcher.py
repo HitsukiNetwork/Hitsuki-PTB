@@ -48,7 +48,8 @@ class TestDispatcher(object):
     def error_handler(self, bot, update, error):
         self.received = error.message
 
-    def error_handler_raise_error(self, bot, update, error):
+    @staticmethod
+    def error_handler_raise_error(bot, update, error):
         raise Exception('Failing bigly')
 
     def callback_increase_count(self, bot, update):
@@ -61,7 +62,8 @@ class TestDispatcher(object):
 
         return callback
 
-    def callback_raise_error(self, bot, update):
+    @staticmethod
+    def callback_raise_error(bot, update):
         raise TelegramError(update.message.text)
 
     def callback_if_not_update_queue(self, bot, update, update_queue=None):
@@ -107,7 +109,8 @@ class TestDispatcher(object):
 
         assert self.count == 1
 
-    def test_run_async_multiple(self, bot, dp, dp2):
+    @staticmethod
+    def test_run_async_multiple(bot, dp, dp2):
 
         def get_dispatcher_name(q):
             q.put(current_thread().name)
@@ -125,7 +128,8 @@ class TestDispatcher(object):
 
         assert name1 != name2
 
-    def test_multiple_run_async_decorator(self, dp, dp2):
+    @staticmethod
+    def test_multiple_run_async_decorator(dp, dp2):
         # Make sure we got two dispatchers and that they are not the same
         assert isinstance(dp, Dispatcher)
         assert isinstance(dp2, Dispatcher)
@@ -173,7 +177,8 @@ class TestDispatcher(object):
             dp.remove_handler(handler)
         dp.remove_handler(handler, group=2)
 
-    def test_error_start_twice(self, dp):
+    @staticmethod
+    def test_error_start_twice(dp):
         assert dp.running
         dp.start()
 
@@ -203,7 +208,8 @@ class TestDispatcher(object):
         with pytest.raises(TypeError, match='group is not int'):
             dp.add_handler(handler, 'one')
 
-    def test_flow_stop(self, dp, bot):
+    @staticmethod
+    def test_flow_stop(dp, bot):
         passed = []
 
         def start1(b, u):
@@ -230,7 +236,8 @@ class TestDispatcher(object):
         dp.process_update(update)
         assert passed == ['start1']
 
-    def test_exception_in_handler(self, dp, bot):
+    @staticmethod
+    def test_exception_in_handler(dp, bot):
         passed = []
 
         def start1(b, u):
@@ -259,7 +266,8 @@ class TestDispatcher(object):
         dp.process_update(update)
         assert passed == ['start1', 'start3']
 
-    def test_telegram_error_in_handler(self, dp, bot):
+    @staticmethod
+    def test_telegram_error_in_handler(dp, bot):
         passed = []
         err = TelegramError('Telegram error')
 
@@ -289,7 +297,8 @@ class TestDispatcher(object):
         assert passed == ['start1', 'error', err, 'start3']
         assert passed[2] is err
 
-    def test_flow_stop_in_error_handler(self, dp, bot):
+    @staticmethod
+    def test_flow_stop_in_error_handler(dp, bot):
         passed = []
         err = TelegramError('Telegram error')
 

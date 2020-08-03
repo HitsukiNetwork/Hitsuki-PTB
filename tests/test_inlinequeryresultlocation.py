@@ -65,7 +65,8 @@ class TestInlineQueryResultLocation(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_location.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_location):
+    @staticmethod
+    def test_to_dict(inline_query_result_location):
         inline_query_result_location_dict = inline_query_result_location.to_dict()
 
         assert isinstance(inline_query_result_location_dict, dict)

@@ -40,7 +40,8 @@ class TestInputTextMessageContent(object):
         assert input_text_message_content.message_text == self.message_text
         assert input_text_message_content.disable_web_page_preview == self.disable_web_page_preview
 
-    def test_to_dict(self, input_text_message_content):
+    @staticmethod
+    def test_to_dict(input_text_message_content):
         input_text_message_content_dict = input_text_message_content.to_dict()
 
         assert isinstance(input_text_message_content_dict, dict)

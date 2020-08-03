@@ -74,7 +74,8 @@ class TestInlineQueryResultVideo(object):
                 self.input_message_content.to_dict())
         assert inline_query_result_video.reply_markup.to_dict() == self.reply_markup.to_dict()
 
-    def test_to_dict(self, inline_query_result_video):
+    @staticmethod
+    def test_to_dict(inline_query_result_video):
         inline_query_result_video_dict = inline_query_result_video.to_dict()
 
         assert isinstance(inline_query_result_video_dict, dict)

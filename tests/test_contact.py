@@ -55,7 +55,8 @@ class TestContact(object):
         assert contact.last_name == self.last_name
         assert contact.user_id == self.user_id
 
-    def test_send_with_contact(self, monkeypatch, bot, chat_id, contact):
+    @staticmethod
+    def test_send_with_contact(monkeypatch, bot, chat_id, contact):
 
         def test(_, url, data, **kwargs):
             phone = data['phone_number'] == contact.phone_number
@@ -67,11 +68,13 @@ class TestContact(object):
         message = bot.send_contact(contact=contact, chat_id=chat_id)
         assert message
 
-    def test_send_contact_without_required(self, bot, chat_id):
+    @staticmethod
+    def test_send_contact_without_required(bot, chat_id):
         with pytest.raises(ValueError, match='Either contact or phone_number and first_name'):
             bot.send_contact(chat_id=chat_id)
 
-    def test_to_dict(self, contact):
+    @staticmethod
+    def test_to_dict(contact):
         contact_dict = contact.to_dict()
 
         assert isinstance(contact_dict, dict)

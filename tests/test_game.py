@@ -71,7 +71,8 @@ class TestGame(object):
         assert game.text_entities == self.text_entities
         assert game.animation == self.animation
 
-    def test_to_dict(self, game):
+    @staticmethod
+    def test_to_dict(game):
         game_dict = game.to_dict()
 
         assert isinstance(game_dict, dict)
@@ -82,13 +83,15 @@ class TestGame(object):
         assert game_dict['text_entities'] == [game.text_entities[0].to_dict()]
         assert game_dict['animation'] == game.animation.to_dict()
 
-    def test_parse_entity(self, game):
+    @staticmethod
+    def test_parse_entity(game):
         entity = MessageEntity(type=MessageEntity.URL, offset=13, length=17)
         game.text_entities = [entity]
 
         assert game.parse_text_entity(entity) == 'http://google.com'
 
-    def test_parse_entities(self, game):
+    @staticmethod
+    def test_parse_entities(game):
         entity = MessageEntity(type=MessageEntity.URL, offset=13, length=17)
         entity_2 = MessageEntity(type=MessageEntity.BOLD, offset=13, length=1)
         game.text_entities = [entity_2, entity]

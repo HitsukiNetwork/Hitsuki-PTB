@@ -49,7 +49,8 @@ class TestInlineQueryResultCachedSticker(object):
         assert (inline_query_result_cached_sticker.reply_markup.to_dict() ==
                 self.reply_markup.to_dict())
 
-    def test_to_dict(self, inline_query_result_cached_sticker):
+    @staticmethod
+    def test_to_dict(inline_query_result_cached_sticker):
         inline_query_result_cached_sticker_dict = inline_query_result_cached_sticker.to_dict()
 
         assert isinstance(inline_query_result_cached_sticker_dict, dict)
