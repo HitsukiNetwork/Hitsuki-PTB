@@ -131,19 +131,18 @@ class TestSticker(object):
         message = bot.send_sticker(chat_id=chat_id, sticker=self.sticker_file_url)
         sticker = message.sticker
 
-        assert isinstance(message.sticker, Sticker)
-        assert isinstance(message.sticker.file_id, str)
-        assert message.sticker.file_id != ''
-        assert message.sticker.width == sticker.width
-        assert message.sticker.height == sticker.height
-        assert message.sticker.file_size == sticker.file_size
-
-        assert isinstance(message.sticker.thumb, PhotoSize)
-        assert isinstance(message.sticker.thumb.file_id, str)
-        assert message.sticker.thumb.file_id != ''
-        assert message.sticker.thumb.width == sticker.thumb.width
-        assert message.sticker.thumb.height == sticker.thumb.height
-        assert message.sticker.thumb.file_size == sticker.thumb.file_size
+        assert isinstance(sticker, Sticker)
+        assert isinstance(sticker.file_id, str)
+        assert sticker.file_id != ''
+        assert sticker.width == sticker.width
+        assert sticker.height == sticker.height
+        assert sticker.file_size == sticker.file_size
+        assert isinstance(sticker.thumb, PhotoSize)
+        assert isinstance(sticker.thumb.file_id, str)
+        assert sticker.thumb.file_id != ''
+        assert sticker.thumb.width == sticker.thumb.width
+        assert sticker.thumb.height == sticker.thumb.height
+        assert sticker.thumb.file_size == sticker.thumb.file_size
 
     def test_de_json(self, bot, sticker):
         json_dict = {

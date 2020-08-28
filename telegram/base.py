@@ -43,9 +43,7 @@ class TelegramObject(object):
         if not data:
             return None
 
-        data = data.copy()
-
-        return data
+        return data.copy()
 
     def to_json(self):
         """
@@ -66,11 +64,7 @@ class TelegramObject(object):
 
             value = self.__dict__[key]
             if value is not None:
-                if hasattr(value, 'to_dict'):
-                    data[key] = value.to_dict()
-                else:
-                    data[key] = value
-
+                data[key] = value.to_dict() if hasattr(value, 'to_dict') else value
         if data.get('from_user'):
             data['from'] = data.pop('from_user', None)
         return data

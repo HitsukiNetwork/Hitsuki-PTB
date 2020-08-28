@@ -64,11 +64,7 @@ class PhotoSize(TelegramObject):
         if not data:
             return []
 
-        photos = []
-        for photo in data:
-            photos.append(cls.de_json(photo, bot))
-
-        return photos
+        return [cls.de_json(photo, bot) for photo in data]
 
     def get_file(self, timeout=None, **kwargs):
         """Convenience wrapper over :attr:`telegram.Bot.get_file`

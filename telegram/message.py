@@ -944,7 +944,7 @@ class Message(TelegramObject):
         if message_text is None:
             return None
 
-        if not sys.maxunicode == 0xffff:
+        if sys.maxunicode != 0xFFFF:
             message_text = message_text.encode('utf-16-le')
 
         html_text = ''
@@ -1041,7 +1041,7 @@ class Message(TelegramObject):
         if message_text is None:
             return None
 
-        if not sys.maxunicode == 0xffff:
+        if sys.maxunicode != 0xFFFF:
             message_text = message_text.encode('utf-16-le')
 
         markdown_text = ''

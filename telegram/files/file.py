@@ -113,11 +113,7 @@ class File(TelegramObject):
             out.write(buf)
             return out
         else:
-            if custom_path:
-                filename = custom_path
-            else:
-                filename = basename(self.file_path)
-
+            filename = custom_path if custom_path else basename(self.file_path)
             buf = self.bot.request.retrieve(url, timeout=timeout)
             if self._credentials:
                 buf = decrypt(b64decode(self._credentials.secret),

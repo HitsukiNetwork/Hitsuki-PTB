@@ -72,9 +72,8 @@ class InputFile(object):
         if not self.filename or '.' not in self.filename:
             self.filename = self.mimetype.replace('/', '.')
 
-        if sys.version_info < (3,):
-            if isinstance(self.filename, unicode):  # flake8: noqa  pylint: disable=E0602
-                self.filename = self.filename.encode('utf-8', 'replace')
+        if sys.version_info < (3,) and isinstance(self.filename, unicode):  # flake8: noqa  pylint: disable=E0602
+            self.filename = self.filename.encode('utf-8', 'replace')
 
     @property
     def field_tuple(self):

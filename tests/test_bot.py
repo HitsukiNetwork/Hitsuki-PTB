@@ -499,9 +499,9 @@ class TestBot(object):
         game_short_name = 'python_telegram_bot_test_game'
         game = bot.send_game(chat_id, game_short_name)
 
-        score = int(BASE_TIME) - HIGHSCORE_DELTA - 1
-
         with pytest.raises(BadRequest, match='Bot_score_not_modified'):
+            score = int(BASE_TIME) - HIGHSCORE_DELTA - 1
+
             bot.set_game_score(user_id=chat_id,
                                score=score,
                                chat_id=game.chat_id,

@@ -71,11 +71,7 @@ class MessageEntity(TelegramObject):
         if not data:
             return []
 
-        entities = []
-        for entity in data:
-            entities.append(cls.de_json(entity, bot))
-
-        return entities
+        return [cls.de_json(entity, bot) for entity in data]
 
     MENTION = 'mention'
     """:obj:`str`: 'mention'"""

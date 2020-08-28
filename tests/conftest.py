@@ -85,8 +85,7 @@ def create_dp(bot):
 
 @pytest.fixture(scope='session')
 def _dp(bot):
-    for dp in create_dp(bot):
-        yield dp
+    yield from create_dp(bot)
 
 
 @pytest.fixture(scope='function')

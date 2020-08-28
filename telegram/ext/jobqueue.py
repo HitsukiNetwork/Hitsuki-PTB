@@ -58,8 +58,8 @@ class JobQueue(object):
     def _put(self, job, next_t=None, last_t=None):
         if next_t is None:
             next_t = job.interval
-            if next_t is None:
-                raise ValueError('next_t is None')
+        if next_t is None:
+            raise ValueError('next_t is None')
 
         if isinstance(next_t, datetime.datetime):
             next_t = (next_t - datetime.datetime.now()).total_seconds()
@@ -240,7 +240,7 @@ class JobQueue(object):
             if job.enabled:
                 try:
                     current_week_day = datetime.datetime.now().weekday()
-                    if any(day == current_week_day for day in job.days):
+                    if current_week_day in job.days:
                         self.logger.debug('Running job %s', job.name)
                         job.run(self.bot)
 
@@ -259,14 +259,12 @@ class JobQueue(object):
         """Starts the job_queue thread."""
         self.__start_lock.acquire()
 
+        self.__start_lock.release()
         if not self._running:
             self._running = True
-            self.__start_lock.release()
             self.__thread = Thread(target=self._main_loop, name="job_queue")
             self.__thread.start()
             self.logger.debug('%s thread started', self.__class__.__name__)
-        else:
-            self.__start_lock.release()
 
     def _main_loop(self):
         """
@@ -410,7 +408,9 @@ class Job(object):
         if interval is None and self.repeat:
             raise ValueError("The 'interval' can not be 'None' when 'repeat' is set to 'True'")
 
-        if not (interval is None or isinstance(interval, (Number, datetime.timedelta))):
+        if interval is not None and not isinstance(
+            interval, (Number, datetime.timedelta)
+        ):
             raise ValueError("The 'interval' must be of type 'datetime.timedelta',"
                              " 'int' or 'float'")
 
@@ -449,7 +449,7 @@ class Job(object):
         if not all(isinstance(day, int) for day in days):
             raise ValueError("The elements of the 'days' argument should be of type 'int'")
 
-        if not all(0 <= day <= 6 for day in days):
+        if any(not 0 <= day <= 6 for day in days):
             raise ValueError("The elements of the 'days' argument should be from 0 up to and "
                              "including 6")
 

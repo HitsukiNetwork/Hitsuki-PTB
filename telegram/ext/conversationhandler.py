@@ -159,21 +159,19 @@ class ConversationHandler(Handler):
             logging.warning("If 'per_message=True' is used, 'per_chat=True' should also be used, "
                             "since message IDs are not globally unique.")
 
-        all_handlers = []
-        all_handlers.extend(entry_points)
+        all_handlers = list(entry_points)
         all_handlers.extend(fallbacks)
 
         for state_handlers in states.values():
             all_handlers.extend(state_handlers)
 
-        if self.per_message:
-            for handler in all_handlers:
+        for handler in all_handlers:
+            if self.per_message:
                 if not isinstance(handler, CallbackQueryHandler):
                     logging.warning("If 'per_message=True', all entry points and state handlers"
                                     " must be 'CallbackQueryHandler', since no other handlers "
                                     "have a message context.")
-        else:
-            for handler in all_handlers:
+            else:
                 if isinstance(handler, CallbackQueryHandler):
                     logging.warning("If 'per_message=False', 'CallbackQueryHandler' will not be "
                                     "tracked for every message.")
@@ -318,9 +316,6 @@ class ConversationHandler(Handler):
         if new_state == self.END:
             if key in self.conversations:
                 del self.conversations[key]
-            else:
-                pass
-
         elif isinstance(new_state, Promise):
             self.conversations[key] = (self.conversations.get(key), new_state)
 
