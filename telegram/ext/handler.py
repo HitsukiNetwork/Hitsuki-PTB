@@ -116,10 +116,10 @@ class Handler(object):
             chat = update.effective_chat
             user = update.effective_user
 
-            if self.pass_user_data:
-                optional_args['user_data'] = dispatcher.user_data[user.id if user else None]
+        if self.pass_user_data:
+            optional_args['user_data'] = dispatcher.user_data[user.id if user else None]
 
-            if self.pass_chat_data:
-                optional_args['chat_data'] = dispatcher.chat_data[chat.id if chat else None]
+        if self.pass_chat_data:
+            optional_args['chat_data'] = dispatcher.chat_data[chat.id if chat else None]
 
         return optional_args

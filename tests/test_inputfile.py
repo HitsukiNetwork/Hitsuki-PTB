@@ -29,11 +29,7 @@ class TestInputFile(object):
     png = os.path.join('tests', 'data', 'game.png')
 
     def test_subprocess_pipe(self):
-        if sys.platform == 'win32':
-            cmd = ['type', self.png]
-        else:
-            cmd = ['cat', self.png]
-
+        cmd = ['type', self.png] if sys.platform == 'win32' else ['cat', self.png]
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=(sys.platform == 'win32'))
         in_file = InputFile(proc.stdout)
 

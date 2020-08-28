@@ -37,10 +37,7 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 
 def facts_to_str(user_data):
-    facts = []
-
-    for key, value in user_data.items():
-        facts.append('{} - {}'.format(key, value))
+    facts = ['{} - {}'.format(key, value) for key, value in user_data.items()]
 
     return "\n".join(facts).join(['\n', '\n'])
 

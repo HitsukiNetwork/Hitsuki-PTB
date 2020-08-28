@@ -713,10 +713,7 @@ class Filters(object):
         """
 
         def __init__(self, lang):
-            if isinstance(lang, string_types):
-                self.lang = [lang]
-            else:
-                self.lang = lang
+            self.lang = [lang] if isinstance(lang, string_types) else lang
             self.name = 'Filters.language({})'.format(self.lang)
 
         def filter(self, message):

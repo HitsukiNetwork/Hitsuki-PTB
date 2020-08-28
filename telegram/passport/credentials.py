@@ -377,11 +377,7 @@ class _CredentialsBase(TelegramObject):
         if not data:
             return []
 
-        credentials = []
-        for c in data:
-            credentials.append(cls.de_json(c, bot=bot))
-
-        return credentials
+        return [cls.de_json(c, bot=bot) for c in data]
 
 
 class DataCredentials(_CredentialsBase):

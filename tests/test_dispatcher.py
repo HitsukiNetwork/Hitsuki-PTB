@@ -30,8 +30,7 @@ from tests.conftest import create_dp
 
 @pytest.fixture(scope='function')
 def dp2(bot):
-    for dp in create_dp(bot):
-        yield dp
+    yield from create_dp(bot)
 
 
 class TestDispatcher(object):

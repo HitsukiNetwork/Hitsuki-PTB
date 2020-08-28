@@ -34,10 +34,10 @@ def msg(bot, update):
         # Print their decrypted data
         # Files will be downloaded to current directory
         for data in passport_data.decrypted_data:  # This is where the data gets decrypted
-            if data.type == 'phone_number':
-                print('Phone: ', data.phone_number)
-            elif data.type == 'email':
+            if data.type == 'email':
                 print('Email: ', data.email)
+            elif data.type == 'phone_number':
+                print('Phone: ', data.phone_number)
             if data.type in ('personal_details', 'passport', 'driver_license', 'identity_card',
                              'internal_passport', 'address'):
                 print(data.type, data.data)
@@ -48,21 +48,39 @@ def msg(bot, update):
                     actual_file = file.get_file()
                     print(actual_file)
                     actual_file.download()
-            if data.type in ('passport', 'driver_license', 'identity_card', 'internal_passport'):
-                if data.front_side:
-                    file = data.front_side.get_file()
-                    print(data.type, file)
-                    file.download()
-            if data.type in ('driver_license' and 'identity_card'):
-                if data.reverse_side:
-                    file = data.reverse_side.get_file()
-                    print(data.type, file)
-                    file.download()
-            if data.type in ('passport', 'driver_license', 'identity_card', 'internal_passport'):
-                if data.selfie:
-                    file = data.selfie.get_file()
-                    print(data.type, file)
-                    file.download()
+            if (
+                data.type
+                in (
+                    'passport',
+                    'driver_license',
+                    'identity_card',
+                    'internal_passport',
+                )
+                and data.front_side
+            ):
+                file = data.front_side.get_file()
+                print(data.type, file)
+                file.download()
+            if (
+                data.type in ('driver_license' and 'identity_card')
+                and data.reverse_side
+            ):
+                file = data.reverse_side.get_file()
+                print(data.type, file)
+                file.download()
+            if (
+                data.type
+                in (
+                    'passport',
+                    'driver_license',
+                    'identity_card',
+                    'internal_passport',
+                )
+                and data.selfie
+            ):
+                file = data.selfie.get_file()
+                print(data.type, file)
+                file.download()
             if data.type in ('passport', 'driver_license', 'identity_card', 'internal_passport',
                              'utility_bill', 'bank_statement', 'rental_agreement',
                              'passport_registration', 'temporary_registration'):

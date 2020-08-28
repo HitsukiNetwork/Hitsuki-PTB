@@ -116,8 +116,11 @@ class WebhookHandler(BaseHTTPServer.BaseHTTPRequestHandler, object):
             self.server.update_queue.put(update)
 
     def _validate_post(self):
-        if not (self.path == self.server.webhook_path and 'content-type' in self.headers
-                and self.headers['content-type'] == 'application/json'):
+        if (
+            self.path != self.server.webhook_path
+            or 'content-type' not in self.headers
+            or self.headers['content-type'] != 'application/json'
+        ):
             raise _InvalidPost(403)
 
     def _get_content_len(self):

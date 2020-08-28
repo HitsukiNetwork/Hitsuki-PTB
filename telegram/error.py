@@ -29,11 +29,7 @@ def _lstrip_str(in_s, lstr):
         str:
 
     """
-    if in_s.startswith(lstr):
-        res = in_s[len(lstr):]
-    else:
-        res = in_s
-    return res
+    return in_s[len(lstr):] if in_s.startswith(lstr) else in_s
 
 
 class TelegramError(Exception):

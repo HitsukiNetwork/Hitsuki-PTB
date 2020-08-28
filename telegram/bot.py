@@ -51,8 +51,7 @@ def info(func):
         if not self.bot:
             self.get_me()
 
-        result = func(self, *args, **kwargs)
-        return result
+        return func(self, *args, **kwargs)
 
     return decorator
 
@@ -300,9 +299,7 @@ class Bot(TelegramObject):
 
         data = {'chat_id': chat_id, 'message_id': message_id}
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     @message
@@ -1382,9 +1379,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id, 'action': action}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def answer_inline_query(self,
@@ -1460,9 +1455,7 @@ class Bot(TelegramObject):
 
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def get_user_profile_photos(self, user_id, offset=None, limit=100, timeout=None, **kwargs):
@@ -1586,9 +1579,7 @@ class Bot(TelegramObject):
                 until_date = to_timestamp(until_date)
             data['until_date'] = until_date
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def unban_chat_member(self, chat_id, user_id, timeout=None, **kwargs):
@@ -1618,9 +1609,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id, 'user_id': user_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def answer_callback_query(self,
@@ -1679,9 +1668,7 @@ class Bot(TelegramObject):
             data['cache_time'] = cache_time
         data.update(kwargs)
 
-        result = self._request.post(url_, data, timeout=timeout)
-
-        return result
+        return self._request.post(url_, data, timeout=timeout)
 
     @log
     @message
@@ -2072,9 +2059,7 @@ class Bot(TelegramObject):
             data['allowed_updates'] = allowed_updates
         data.update(kwargs)
 
-        result = self._request.post(url_, data, timeout=timeout)
-
-        return result
+        return self._request.post(url_, data, timeout=timeout)
 
     @log
     def delete_webhook(self, timeout=None, **kwargs):
@@ -2099,9 +2084,7 @@ class Bot(TelegramObject):
 
         data = kwargs
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def leave_chat(self, chat_id, timeout=None, **kwargs):
@@ -2127,9 +2110,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def get_chat(self, chat_id, timeout=None, **kwargs):
@@ -2217,9 +2198,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def get_chat_member(self, chat_id, user_id, timeout=None, **kwargs):
@@ -2276,9 +2255,7 @@ class Bot(TelegramObject):
 
         data = {'chat_id': chat_id, 'sticker_set_name': sticker_set_name}
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def delete_chat_sticker_set(self, chat_id, timeout=None, **kwargs):
@@ -2303,9 +2280,7 @@ class Bot(TelegramObject):
 
         data = {'chat_id': chat_id}
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     def get_webhook_info(self, timeout=None, **kwargs):
         """Use this method to get current webhook status. Requires no parameters.
@@ -2623,9 +2598,7 @@ class Bot(TelegramObject):
             data['error_message'] = error_message
         data.update(kwargs)
 
-        result = self._request.post(url_, data, timeout=timeout)
-
-        return result
+        return self._request.post(url_, data, timeout=timeout)
 
     @log
     def answer_pre_checkout_query(self,
@@ -2679,9 +2652,7 @@ class Bot(TelegramObject):
             data['error_message'] = error_message
         data.update(kwargs)
 
-        result = self._request.post(url_, data, timeout=timeout)
-
-        return result
+        return self._request.post(url_, data, timeout=timeout)
 
     @log
     def restrict_chat_member(self,
@@ -2746,9 +2717,7 @@ class Bot(TelegramObject):
             data['can_add_web_page_previews'] = can_add_web_page_previews
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def promote_chat_member(self,
@@ -2825,9 +2794,7 @@ class Bot(TelegramObject):
             data['can_promote_members'] = can_promote_members
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def export_chat_invite_link(self, chat_id, timeout=None, **kwargs):
@@ -2855,9 +2822,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def set_chat_photo(self, chat_id, photo, timeout=None, **kwargs):
@@ -2894,9 +2859,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id, 'photo': photo}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def delete_chat_photo(self, chat_id, timeout=None, **kwargs):
@@ -2929,9 +2892,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def set_chat_title(self, chat_id, title, timeout=None, **kwargs):
@@ -2965,9 +2926,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id, 'title': title}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def set_chat_description(self, chat_id, description, timeout=None, **kwargs):
@@ -2996,9 +2955,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id, 'description': description}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def pin_chat_message(self,
@@ -3037,9 +2994,7 @@ class Bot(TelegramObject):
             data['disable_notification'] = disable_notification
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def unpin_chat_message(self, chat_id, timeout=None, **kwargs):
@@ -3067,9 +3022,7 @@ class Bot(TelegramObject):
         data = {'chat_id': chat_id}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def get_sticker_set(self, name, timeout=None, **kwargs):
@@ -3208,9 +3161,7 @@ class Bot(TelegramObject):
             data['mask_position'] = mask_position
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def add_sticker_to_set(self,
@@ -3262,9 +3213,7 @@ class Bot(TelegramObject):
             data['mask_position'] = mask_position
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def set_sticker_position_in_set(self, sticker, position, timeout=None, **kwargs):
@@ -3290,9 +3239,7 @@ class Bot(TelegramObject):
         data = {'sticker': sticker, 'position': position}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def delete_sticker_from_set(self, sticker, timeout=None, **kwargs):
@@ -3317,9 +3264,7 @@ class Bot(TelegramObject):
         data = {'sticker': sticker}
         data.update(kwargs)
 
-        result = self._request.post(url, data, timeout=timeout)
-
-        return result
+        return self._request.post(url, data, timeout=timeout)
 
     @log
     def set_passport_data_errors(self, user_id, errors, timeout=None, **kwargs):
@@ -3355,9 +3300,7 @@ class Bot(TelegramObject):
         data = {'user_id': user_id, 'errors': [error.to_dict() for error in errors]}
         data.update(kwargs)
 
-        result = self._request.post(url_, data, timeout=timeout)
-
-        return result
+        return self._request.post(url_, data, timeout=timeout)
 
     def to_dict(self):
         data = {'id': self.id, 'username': self.username, 'first_name': self.username}

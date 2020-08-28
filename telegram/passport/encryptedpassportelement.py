@@ -190,11 +190,7 @@ class EncryptedPassportElement(TelegramObject):
         if not data:
             return []
 
-        encrypted_passport_elements = []
-        for element in data:
-            encrypted_passport_elements.append(cls.de_json(element, bot))
-
-        return encrypted_passport_elements
+        return [cls.de_json(element, bot) for element in data]
 
     def to_dict(self):
         data = super(EncryptedPassportElement, self).to_dict()

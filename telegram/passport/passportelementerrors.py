@@ -135,8 +135,7 @@ class PassportElementErrorFiles(PassportElementError):
         super(PassportElementErrorFiles, self).__init__('files', type, message)
         self.file_hashes = file_hashes
 
-        self._id_attrs = ((self.source, self.type, self.message) +
-                          tuple([file_hash for file_hash in file_hashes]))
+        self._id_attrs = (self.source, self.type, self.message) + tuple(file_hashes)
 
 
 class PassportElementErrorFrontSide(PassportElementError):
@@ -290,8 +289,7 @@ class PassportElementErrorTranslationFiles(PassportElementError):
                                                                    message)
         self.file_hashes = file_hashes
 
-        self._id_attrs = ((self.source, self.type, self.message) +
-                          tuple([file_hash for file_hash in file_hashes]))
+        self._id_attrs = (self.source, self.type, self.message) + tuple(file_hashes)
 
 
 class PassportElementErrorUnspecified(PassportElementError):

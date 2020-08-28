@@ -85,8 +85,7 @@ class TestLocation(object):
     def test_stop_live_inline_message(monkeypatch, bot):
 
         def test(_, url, data, **kwargs):
-            id = data['inline_message_id'] == 1234
-            return id
+            return data['inline_message_id'] == 1234
 
         monkeypatch.setattr('telegram.utils.request.Request.post', test)
         assert bot.stop_message_live_location(inline_message_id=1234)

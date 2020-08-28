@@ -119,11 +119,7 @@ class User(TelegramObject):
         if not data:
             return []
 
-        users = []
-        for user in data:
-            users.append(cls.de_json(user, bot))
-
-        return users
+        return [cls.de_json(user, bot) for user in data]
 
     def mention_markdown(self, name=None):
         """
