@@ -372,8 +372,8 @@ class TestPassport(object):
 
         def test(_, url, data, **kwargs):
             return (
-                data['user_id'] == chat_id and data['errors'][0]['file_hash'] ==
-                (passport_data.decrypted_credentials.secure_data.driver_license.selfie.file_hash)
+                data['user_id'] == chat_id and data['errors'][0]['file_hash']
+                == (passport_data.decrypted_credentials.secure_data.driver_license.selfie.file_hash)
                 and data['errors'][1]['data_hash'] == (
                     passport_data.decrypted_credentials.secure_data.driver_license.data.data_hash))
 

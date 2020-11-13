@@ -116,7 +116,7 @@ def main():
                              pass_user_data=True),
                 RegexHandler('^Something else...$', custom_choice),
             ],
-            TYPING_CHOICE: [MessageHandler(Filters.text, regular_choice, pass_user_data=True),],
+            TYPING_CHOICE: [MessageHandler(Filters.text, regular_choice, pass_user_data=True), ],
             TYPING_REPLY: [
                 MessageHandler(Filters.text, received_information, pass_user_data=True),
             ],

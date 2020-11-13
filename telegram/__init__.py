@@ -1,4 +1,97 @@
-''  #!/usr/bin/env python
+from .version import __version__  # flake8: noqa
+from .passport.credentials import (Credentials, DataCredentials, SecureData, FileCredentials,
+                                   TelegramDecryptionError)
+from .passport.passportelementerrors import (
+    PassportElementError, PassportElementErrorDataField, PassportElementErrorFile,
+    PassportElementErrorFiles, PassportElementErrorFrontSide, PassportElementErrorReverseSide,
+    PassportElementErrorSelfie, PassportElementErrorTranslationFile,
+    PassportElementErrorTranslationFiles, PassportElementErrorUnspecified)
+from .constants import (MAX_MESSAGE_LENGTH, MAX_CAPTION_LENGTH, SUPPORTED_WEBHOOK_PORTS,
+                        MAX_FILESIZE_DOWNLOAD, MAX_FILESIZE_UPLOAD,
+                        MAX_MESSAGES_PER_SECOND_PER_CHAT, MAX_MESSAGES_PER_SECOND,
+                        MAX_MESSAGES_PER_MINUTE_PER_GROUP)
+from .bot import Bot
+from .files.inputmedia import (InputMedia, InputMediaVideo, InputMediaPhoto, InputMediaAnimation,
+                               InputMediaAudio, InputMediaDocument)
+from .update import Update
+from .games.gamehighscore import GameHighScore
+from .webhookinfo import WebhookInfo
+from .payment.shippingquery import ShippingQuery
+from .payment.precheckoutquery import PreCheckoutQuery
+from .payment.shippingoption import ShippingOption
+from .payment.labeledprice import LabeledPrice
+from .inline.inputcontactmessagecontent import InputContactMessageContent
+from .inline.inputvenuemessagecontent import InputVenueMessageContent
+from .inline.inputlocationmessagecontent import InputLocationMessageContent
+from .inline.inputtextmessagecontent import InputTextMessageContent
+from .inline.inlinequeryresultgame import InlineQueryResultGame
+from .inline.inlinequeryresultvoice import InlineQueryResultVoice
+from .inline.inlinequeryresultvideo import InlineQueryResultVideo
+from .inline.inlinequeryresultvenue import InlineQueryResultVenue
+from .inline.inlinequeryresultphoto import InlineQueryResultPhoto
+from .inline.inlinequeryresultmpeg4gif import InlineQueryResultMpeg4Gif
+from .inline.inlinequeryresultlocation import InlineQueryResultLocation
+from .inline.inlinequeryresultgif import InlineQueryResultGif
+from .inline.inlinequeryresultdocument import InlineQueryResultDocument
+from .inline.inlinequeryresultcontact import InlineQueryResultContact
+from .inline.inlinequeryresultcachedvoice import InlineQueryResultCachedVoice
+from .inline.inlinequeryresultcachedvideo import InlineQueryResultCachedVideo
+from .inline.inlinequeryresultcachedsticker import InlineQueryResultCachedSticker
+from .inline.inlinequeryresultcachedphoto import InlineQueryResultCachedPhoto
+from .inline.inlinequeryresultcachedmpeg4gif import InlineQueryResultCachedMpeg4Gif
+from .inline.inlinequeryresultcachedgif import InlineQueryResultCachedGif
+from .inline.inlinequeryresultcacheddocument import InlineQueryResultCachedDocument
+from .inline.inlinequeryresultcachedaudio import InlineQueryResultCachedAudio
+from .inline.inlinequeryresultaudio import InlineQueryResultAudio
+from .inline.inlinequeryresultarticle import InlineQueryResultArticle
+from .inline.inlinequeryresult import InlineQueryResult
+from .inline.inlinequery import InlineQuery
+from .inline.inputmessagecontent import InputMessageContent
+from .inline.inlinekeyboardmarkup import InlineKeyboardMarkup
+from .inline.inlinekeyboardbutton import InlineKeyboardButton
+from .choseninlineresult import ChosenInlineResult
+from .callbackquery import CallbackQuery
+from .message import Message
+from .passport.passportdata import PassportData
+from .passport.encryptedpassportelement import EncryptedPassportElement
+from .passport.data import IdDocumentData, PersonalDetails, ResidentialAddress
+from .passport.passportfile import PassportFile
+from .passport.credentials import EncryptedCredentials
+from .payment.invoice import Invoice
+from .payment.successfulpayment import SuccessfulPayment
+from .payment.orderinfo import OrderInfo
+from .payment.shippingaddress import ShippingAddress
+from .games.callbackgame import CallbackGame
+from .games.game import Game
+from .messageentity import MessageEntity
+from .parsemode import ParseMode
+from .files.file import File
+from .files.inputfile import InputFile
+from .error import TelegramError
+from .forcereply import ForceReply
+from .replykeyboardremove import ReplyKeyboardRemove
+from .replykeyboardmarkup import ReplyKeyboardMarkup
+from .replymarkup import ReplyMarkup
+from .keyboardbutton import KeyboardButton
+from .userprofilephotos import UserProfilePhotos
+from .chataction import ChatAction
+from .files.videonote import VideoNote
+from .files.venue import Venue
+from .files.location import Location
+from .files.contact import Contact
+from .files.video import Video
+from .files.sticker import Sticker, StickerSet, MaskPosition
+from .files.animation import Animation
+from .files.document import Document
+from .files.voice import Voice
+from .files.audio import Audio
+from .files.photosize import PhotoSize
+from .chatmember import ChatMember
+from .chat import Chat
+from .files.chatphoto import ChatPhoto
+from .user import User
+from .base import TelegramObject
+''  # !/usr/bin/env python
 #
 # A library that provides a Python interface to the Telegram Bot API
 # Copyright (C) 2015-2018
@@ -18,99 +111,6 @@
 # along with this program.  If not, see [http://www.gnu.org/licenses/].
 """A library that provides a Python interface to the Telegram Bot API"""
 
-from .base import TelegramObject
-from .user import User
-from .files.chatphoto import ChatPhoto
-from .chat import Chat
-from .chatmember import ChatMember
-from .files.photosize import PhotoSize
-from .files.audio import Audio
-from .files.voice import Voice
-from .files.document import Document
-from .files.animation import Animation
-from .files.sticker import Sticker, StickerSet, MaskPosition
-from .files.video import Video
-from .files.contact import Contact
-from .files.location import Location
-from .files.venue import Venue
-from .files.videonote import VideoNote
-from .chataction import ChatAction
-from .userprofilephotos import UserProfilePhotos
-from .keyboardbutton import KeyboardButton
-from .replymarkup import ReplyMarkup
-from .replykeyboardmarkup import ReplyKeyboardMarkup
-from .replykeyboardremove import ReplyKeyboardRemove
-from .forcereply import ForceReply
-from .error import TelegramError
-from .files.inputfile import InputFile
-from .files.file import File
-from .parsemode import ParseMode
-from .messageentity import MessageEntity
-from .games.game import Game
-from .games.callbackgame import CallbackGame
-from .payment.shippingaddress import ShippingAddress
-from .payment.orderinfo import OrderInfo
-from .payment.successfulpayment import SuccessfulPayment
-from .payment.invoice import Invoice
-from .passport.credentials import EncryptedCredentials
-from .passport.passportfile import PassportFile
-from .passport.data import IdDocumentData, PersonalDetails, ResidentialAddress
-from .passport.encryptedpassportelement import EncryptedPassportElement
-from .passport.passportdata import PassportData
-from .message import Message
-from .callbackquery import CallbackQuery
-from .choseninlineresult import ChosenInlineResult
-from .inline.inlinekeyboardbutton import InlineKeyboardButton
-from .inline.inlinekeyboardmarkup import InlineKeyboardMarkup
-from .inline.inputmessagecontent import InputMessageContent
-from .inline.inlinequery import InlineQuery
-from .inline.inlinequeryresult import InlineQueryResult
-from .inline.inlinequeryresultarticle import InlineQueryResultArticle
-from .inline.inlinequeryresultaudio import InlineQueryResultAudio
-from .inline.inlinequeryresultcachedaudio import InlineQueryResultCachedAudio
-from .inline.inlinequeryresultcacheddocument import InlineQueryResultCachedDocument
-from .inline.inlinequeryresultcachedgif import InlineQueryResultCachedGif
-from .inline.inlinequeryresultcachedmpeg4gif import InlineQueryResultCachedMpeg4Gif
-from .inline.inlinequeryresultcachedphoto import InlineQueryResultCachedPhoto
-from .inline.inlinequeryresultcachedsticker import InlineQueryResultCachedSticker
-from .inline.inlinequeryresultcachedvideo import InlineQueryResultCachedVideo
-from .inline.inlinequeryresultcachedvoice import InlineQueryResultCachedVoice
-from .inline.inlinequeryresultcontact import InlineQueryResultContact
-from .inline.inlinequeryresultdocument import InlineQueryResultDocument
-from .inline.inlinequeryresultgif import InlineQueryResultGif
-from .inline.inlinequeryresultlocation import InlineQueryResultLocation
-from .inline.inlinequeryresultmpeg4gif import InlineQueryResultMpeg4Gif
-from .inline.inlinequeryresultphoto import InlineQueryResultPhoto
-from .inline.inlinequeryresultvenue import InlineQueryResultVenue
-from .inline.inlinequeryresultvideo import InlineQueryResultVideo
-from .inline.inlinequeryresultvoice import InlineQueryResultVoice
-from .inline.inlinequeryresultgame import InlineQueryResultGame
-from .inline.inputtextmessagecontent import InputTextMessageContent
-from .inline.inputlocationmessagecontent import InputLocationMessageContent
-from .inline.inputvenuemessagecontent import InputVenueMessageContent
-from .inline.inputcontactmessagecontent import InputContactMessageContent
-from .payment.labeledprice import LabeledPrice
-from .payment.shippingoption import ShippingOption
-from .payment.precheckoutquery import PreCheckoutQuery
-from .payment.shippingquery import ShippingQuery
-from .webhookinfo import WebhookInfo
-from .games.gamehighscore import GameHighScore
-from .update import Update
-from .files.inputmedia import (InputMedia, InputMediaVideo, InputMediaPhoto, InputMediaAnimation,
-                               InputMediaAudio, InputMediaDocument)
-from .bot import Bot
-from .constants import (MAX_MESSAGE_LENGTH, MAX_CAPTION_LENGTH, SUPPORTED_WEBHOOK_PORTS,
-                        MAX_FILESIZE_DOWNLOAD, MAX_FILESIZE_UPLOAD,
-                        MAX_MESSAGES_PER_SECOND_PER_CHAT, MAX_MESSAGES_PER_SECOND,
-                        MAX_MESSAGES_PER_MINUTE_PER_GROUP)
-from .passport.passportelementerrors import (
-    PassportElementError, PassportElementErrorDataField, PassportElementErrorFile,
-    PassportElementErrorFiles, PassportElementErrorFrontSide, PassportElementErrorReverseSide,
-    PassportElementErrorSelfie, PassportElementErrorTranslationFile,
-    PassportElementErrorTranslationFiles, PassportElementErrorUnspecified)
-from .passport.credentials import (Credentials, DataCredentials, SecureData, FileCredentials,
-                                   TelegramDecryptionError)
-from .version import __version__  # flake8: noqa
 
 __author__ = 'devs@python-telegram-bot.org'
 

@@ -56,8 +56,8 @@ class InputFile(object):
 
         if filename:
             self.filename = filename
-        elif (hasattr(obj, 'name') and not isinstance(obj.name, int) and  # py3
-              obj.name != '<fdopen>'):  # py2
+        elif (hasattr(obj, 'name') and not isinstance(obj.name, int)  # py3
+              and obj.name != '<fdopen>'):  # py2
             # on py2.7, pylint fails to understand this properly
             # pylint: disable=E1101
             self.filename = os.path.basename(obj.name)
@@ -72,7 +72,8 @@ class InputFile(object):
         if not self.filename or '.' not in self.filename:
             self.filename = self.mimetype.replace('/', '.')
 
-        if sys.version_info < (3,) and isinstance(self.filename, unicode):  # flake8: noqa  pylint: disable=E0602
+        # flake8: noqa  pylint: disable=E0602
+        if sys.version_info < (3,) and isinstance(self.filename, unicode):
             self.filename = self.filename.encode('utf-8', 'replace')
 
     @property

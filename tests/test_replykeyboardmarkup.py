@@ -72,6 +72,6 @@ class TestReplyKeyboardMarkup(object):
                 [1].to_dict())
         assert (
             reply_keyboard_markup_dict['resize_keyboard'] == reply_keyboard_markup.resize_keyboard)
-        assert (reply_keyboard_markup_dict['one_time_keyboard'] ==
-                reply_keyboard_markup.one_time_keyboard)
+        assert (reply_keyboard_markup_dict['one_time_keyboard']
+                == reply_keyboard_markup.one_time_keyboard)
         assert reply_keyboard_markup_dict['selective'] == reply_keyboard_markup.selective

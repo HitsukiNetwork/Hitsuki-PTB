@@ -59,7 +59,7 @@ class TestInputVenueMessageContent(object):
             input_venue_message_content_dict['longitude'] == input_venue_message_content.longitude)
         assert input_venue_message_content_dict['title'] == input_venue_message_content.title
         assert input_venue_message_content_dict['address'] == input_venue_message_content.address
-        assert (input_venue_message_content_dict['foursquare_id'] ==
-                input_venue_message_content.foursquare_id)
-        assert (input_venue_message_content_dict['foursquare_type'] ==
-                input_venue_message_content.foursquare_type)
+        assert (input_venue_message_content_dict['foursquare_id']
+                == input_venue_message_content.foursquare_id)
+        assert (input_venue_message_content_dict['foursquare_type']
+                == input_venue_message_content.foursquare_type)

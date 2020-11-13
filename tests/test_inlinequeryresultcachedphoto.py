@@ -55,8 +55,8 @@ class TestInlineQueryResultCachedPhoto(object):
         assert inline_query_result_cached_photo.description == self.description
         assert inline_query_result_cached_photo.caption == self.caption
         assert inline_query_result_cached_photo.parse_mode == self.parse_mode
-        assert (inline_query_result_cached_photo.input_message_content.to_dict() ==
-                self.input_message_content.to_dict())
+        assert (inline_query_result_cached_photo.input_message_content.to_dict()
+                == self.input_message_content.to_dict())
         assert (
             inline_query_result_cached_photo.reply_markup.to_dict() == self.reply_markup.to_dict())
 
@@ -68,20 +68,20 @@ class TestInlineQueryResultCachedPhoto(object):
         assert (
             inline_query_result_cached_photo_dict['type'] == inline_query_result_cached_photo.type)
         assert inline_query_result_cached_photo_dict['id'] == inline_query_result_cached_photo.id
-        assert (inline_query_result_cached_photo_dict['photo_file_id'] ==
-                inline_query_result_cached_photo.photo_file_id)
-        assert (inline_query_result_cached_photo_dict['title'] ==
-                inline_query_result_cached_photo.title)
-        assert (inline_query_result_cached_photo_dict['description'] ==
-                inline_query_result_cached_photo.description)
-        assert (inline_query_result_cached_photo_dict['caption'] ==
-                inline_query_result_cached_photo.caption)
-        assert (inline_query_result_cached_photo_dict['parse_mode'] ==
-                inline_query_result_cached_photo.parse_mode)
-        assert (inline_query_result_cached_photo_dict['input_message_content'] ==
-                inline_query_result_cached_photo.input_message_content.to_dict())
-        assert (inline_query_result_cached_photo_dict['reply_markup'] ==
-                inline_query_result_cached_photo.reply_markup.to_dict())
+        assert (inline_query_result_cached_photo_dict['photo_file_id']
+                == inline_query_result_cached_photo.photo_file_id)
+        assert (inline_query_result_cached_photo_dict['title']
+                == inline_query_result_cached_photo.title)
+        assert (inline_query_result_cached_photo_dict['description']
+                == inline_query_result_cached_photo.description)
+        assert (inline_query_result_cached_photo_dict['caption']
+                == inline_query_result_cached_photo.caption)
+        assert (inline_query_result_cached_photo_dict['parse_mode']
+                == inline_query_result_cached_photo.parse_mode)
+        assert (inline_query_result_cached_photo_dict['input_message_content']
+                == inline_query_result_cached_photo.input_message_content.to_dict())
+        assert (inline_query_result_cached_photo_dict['reply_markup']
+                == inline_query_result_cached_photo.reply_markup.to_dict())
 
     def test_equality(self):
         a = InlineQueryResultCachedPhoto(self.id, self.photo_file_id)

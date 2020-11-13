@@ -243,9 +243,9 @@ class TestConversationHandler(object):
                                       states={
                                           1: [CallbackQueryHandler(one)],
                                           2: [CallbackQueryHandler(two)]
-                                      },
-                                      fallbacks=[],
-                                      per_message=True)
+        },
+            fallbacks=[],
+            per_message=True)
         dp.add_handler(handler)
 
         # User one, starts the state machine.
